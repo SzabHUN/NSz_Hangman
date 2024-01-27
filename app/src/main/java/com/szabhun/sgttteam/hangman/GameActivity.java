@@ -293,7 +293,7 @@ public class GameActivity extends AppCompatActivity {
     //----------------------------------------//
 
     public int lives = 7;
-    
+
 //-----------------------Fullscreen------------------------------//
 
 @Override
@@ -327,7 +327,52 @@ private void touchvibrator () {
     Log.i(TAG, "Loaded: Vibrator service.");
 }
 //--------------------------------------------------------------------------------------------//
+//----------------------------------------//
+    private void Reset ()
+    {
+        Log.i(TAG,"Start: Reset buttons pair images.");
 
+        for (int i = 0; i < 26 ; i++)
+        {
+            int resID = getResources().getIdentifier(Character.toString(abcs.toCharArray()[i]), "drawable", getPackageName()); //get the ResourceID from the abcs to reset the source image
+            buttons[i].setBackgroundResource(resID); 
+        }
+        Log.i(TAG,"Loaded: Reset buttons pair images.");
+        //---------------------------//
+        Log.i(TAG,"Start: Change buttons to clickable.");
+
+        for (int i = 0 ; i < 26 ; i++)      //go trough all of the buttons
+            buttons[i].setClickable(true);  //set current button to be clickable
+        Log.i(TAG,"Finished: Change buttons to clickable.");
+        //---------------------------//
+        Log.i(TAG, "Start: Reset LetterViews pair images - Image Resource.");
+
+        for (int i = 0; i < 3 ; i++)
+            for (int q = 0 ; q < 8 ; q++)
+            {
+                String STRemptyplaceholder = "emptyplaceholder";                                                //get the res name
+                int resID = getResources().getIdentifier(STRemptyplaceholder, "drawable", getPackageName());    //set resID using the name
+                ltrs[i][q].setImageResource(resID);                                                             //set the image to an empty one
+            }
+        Log.i(TAG,"Finished: Reset LetterViews pair images - Image Resource.");
+        //---------------------------//
+        Log.i(TAG, "Start: Reset LetterViews pair images - Background Resource.");
+
+        for (int i = 0; i < 3 ; i++)
+            for (int q = 0 ; q < 8 ; q++)
+            {
+                String STRemptyplaceholder = "emptyplaceholder";
+                int resID = getResources().getIdentifier(STRemptyplaceholder, "drawable", getPackageName());
+                ltrs[i][q].setBackgroundResource(resID);
+            }
+        Log.i(TAG,"Finished: Reset LetterViews pair images - Background Resource.");
+        //---------------------------//
+        Log.i(TAG, "Start: Reset HangMan image.");
+        hangman.setImageResource(R.drawable.emptyplaceholder);
+        Log.i(TAG,"Finished: Reset HangMan image.");
+        //---------------------------//
+    }
+    //----------------------------------------//
 
     public class GetGlobal implements Runnable {
 
