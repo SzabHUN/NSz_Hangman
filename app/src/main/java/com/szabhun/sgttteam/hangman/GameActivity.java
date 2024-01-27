@@ -39,6 +39,13 @@ public class GameActivity extends AppCompatActivity {
     LinearLayout MLayout;   
     TextView scoreview;
 
+    public Button[] buttons = new Button[26];           // variable to the 26 individual Buttons so its more dynamic
+    public ImageView[][] ltrs = new ImageView[3][8];    /*
+                                                        variable to the 2 rows of 8 individual ImageViews that shows the progress of the game 
+                                                        - more dynamic - easier to use
+                                                        */
+
+
 
     @Override
     public Context createDisplayContext(Display display) {
