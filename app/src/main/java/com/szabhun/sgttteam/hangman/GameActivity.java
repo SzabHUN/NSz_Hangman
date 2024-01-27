@@ -374,6 +374,52 @@ private void touchvibrator () {
     }
     //----------------------------------------//
 
+    public void LockAllTheButtons ()
+    {
+        Log.i(TAG,"Start: Locking all the buttons.");
+        for (int i = 0 ; i < 26 ; i++)
+            buttons[i].setClickable(false);                 //Locks every button so after the game ended the user cannot use them
+        Log.i(TAG,"Finished: Locking all the buttons.");
+    }
+
+    //----------------------------------------//
+    public void SelectAWord ()
+    {
+
+        Log.i(TAG,"Start: selecting the a random word");
+        Resources res = getResources();                             //makes it available to read from the string arrays
+
+        String[] words;
+        if (diff == "easy")
+        {
+            words = res.getStringArray(R.array.easy_words_array);
+            Log.i(TAG, " Successfully selected the EASY words array");
+        }
+        else if (diff == "normal")
+        {
+            words = res.getStringArray(R.array.normal_words_array);
+            Log.i(TAG, " Successfully selected the NORMAL words array");
+        }
+        else if (diff == "hard")
+        {
+            words = res.getStringArray(R.array.hard_words_array);
+            Log.i(TAG, " Successfully selected the HARD words array");
+        }
+        else
+        {
+            words = res.getStringArray(R.array.normal_words_array);
+            Log.i(TAG, "FAILED WORD SELECTION BY DIFFICULTY - RESULTING TO NORMAL DIFFICULTY - GET THIS FIXED ASAP");
+        }
+
+        Log.i(TAG, "Loaded: a total of "+words.length+" words");
+        guessThisWord = words[rnd.nextInt(words.length)];
+        Log.i(TAG, "The selected word is: " + guessThisWord);
+        Log.i(TAG,"Finished: selecting the a random word");
+
+    }
+    //----------------------------------------//
+
+
     public class GetGlobal implements Runnable {
 
         @Override
