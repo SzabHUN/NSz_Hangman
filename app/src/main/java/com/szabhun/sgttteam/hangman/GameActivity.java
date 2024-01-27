@@ -418,7 +418,116 @@ private void touchvibrator () {
 
     }
     //----------------------------------------//
+    public Boolean letMeGo = false;
 
+    //----------------------------------------//
+    public void MarkingTheSpaceForTheWord()
+    {
+        for (int i = 0; i < 2 ; i++) //stops the process while reset class isn't finished
+        {
+            if (letMeGo == false)
+            {
+                i--;
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        Log.i(TAG, "Started: Marking the space for the word to be guessed.");
+        if (guessThisWord.length() >= 1)
+        {
+            if (guessThisWord.toCharArray()[0] != ' ')
+            {
+                ltrs[0][0].setBackgroundResource(R.drawable.underscore1);
+            }
+            else
+            {
+                points++;
+            }
+            if (guessThisWord.length() >= 2)
+            {
+                if (guessThisWord.toCharArray()[1] != ' ')
+                {
+                    ltrs[0][1].setBackgroundResource(R.drawable.underscore2);
+                }
+                else
+                {
+                    points++;
+                }
+                if (guessThisWord.length() >= 3)
+                {
+                    if (guessThisWord.toCharArray()[2] != ' ')
+                    {
+                        ltrs[0][2].setBackgroundResource(R.drawable.underscore3);
+                    }
+                    else
+                    {
+                        points++;
+                    }
+                    if (guessThisWord.length() >= 4)
+                    {
+                        if (guessThisWord.toCharArray()[3] != ' ')
+                        {
+                            ltrs[0][3].setBackgroundResource(R.drawable.underscore4);
+                        }
+                        else
+                        {
+                            points++;
+                        }
+                        if (guessThisWord.length() >= 5)
+                        {
+                            if (guessThisWord.toCharArray()[4] != ' ')
+                            {
+                                ltrs[0][4].setBackgroundResource(R.drawable.underscore5);
+                            }
+                            else
+                            {
+                                points++;
+                            }
+                            if (guessThisWord.length() >= 6)
+                            {
+                                if (guessThisWord.toCharArray()[5] != ' ')
+                                {
+                                    ltrs[0][5].setBackgroundResource(R.drawable.underscore6);
+                                }
+                                else
+                                {
+                                    points++;
+                                }
+                                if (guessThisWord.length() >= 7)
+                                {
+                                    if (guessThisWord.toCharArray()[6] != ' ')
+                                    {
+                                        ltrs[0][6].setBackgroundResource(R.drawable.underscore7);
+                                    }
+                                    else
+                                    {
+                                        points++;
+                                    }
+                                    if (guessThisWord.length() >= 8)
+                                    {
+                                        if (guessThisWord.toCharArray()[7] != ' ')
+                                        {
+                                            ltrs[0][7].setBackgroundResource(R.drawable.underscore8);
+                                        }
+                                        else
+                                        {
+                                            points++;
+                                        }
+
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        Log.i(TAG, "Finished: Marking the space for the word to be guessed.");
+    }
+    //----------------------------------------//
 
     public class GetGlobal implements Runnable {
 
