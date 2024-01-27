@@ -799,6 +799,65 @@ private void touchvibrator () {
 
     }
     //----//
+    public void VictoryTxt ()
+    {
+
+        ltrs[2][0].setImageResource(R.drawable.y);
+        ltrs[2][1].setImageResource(R.drawable.o);
+        ltrs[2][2].setImageResource(R.drawable.u);
+
+        ltrs[2][5].setImageResource(R.drawable.w);
+        ltrs[2][6].setImageResource(R.drawable.i);
+        ltrs[2][7].setImageResource(R.drawable.n);
+
+        LockAllTheButtons();
+
+        //score = score*2;
+
+        Log.i(TAG, "Start:win-switch.");
+        switch (diff)
+        {
+            case "easy":
+                Log.i(TAG, "Res:easy");
+                score = score + 75;
+                if (lives == 7)
+                    score = score + 100;
+                break;
+            case "normal":
+                Log.i(TAG, "Res:normal");
+                score = score + 125;
+                if (lives == 7)
+                    score = score + 250;
+                break;
+            case "hard":
+                Log.i(TAG, "Res:hard");
+                score = score + 200;
+                if (lives == 7)
+                    score = score + 500;
+                break;
+            default:
+                Log.i(TAG, "Res:wtf-win-------------------WTF_HELP---");
+                //Toast.makeText(this, "WTF - win", Toast.LENGTH_LONG).show();
+                break;
+        }
+        Log.i(TAG, "End:win-switch.");
+
+        GlobalVariables globalvariables=(GlobalVariables)getApplication();
+
+        globalvariables.setScore(Long.toString(score));
+
+        scoreview.setText(Long.toString(score));
+
+        Log.i(TAG, "Start:Ressetting the loosing streak.");
+        streak = 0;
+        Log.i(TAG, "End:Ressetting the loosing streak.");
+        Log.i(TAG, "Start:Saving the score.");
+        SaveScore();
+        Log.i(TAG, "End:Saving the score.");
+    }
+    //----//
+    //----//
+    //----//
 
     public class GetGlobal implements Runnable {
 
