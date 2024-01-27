@@ -293,21 +293,41 @@ public class GameActivity extends AppCompatActivity {
     //----------------------------------------//
 
     public int lives = 7;
-
-    //----------------------------------------------------------------------------------------------
-    //----------------------------------------------------------------------------------------------
-    //----------------------------------------------------------------------------------------------
-    //----------------------------------------------------------------------------------------------
-
-
     
+//-----------------------Fullscreen------------------------------//
 
+@Override
+public void onWindowFocusChanged(boolean focuschange) {
+    Log.i(TAG,"Start: Fullscreen.");
+    super.onWindowFocusChanged(focuschange);
+    View objecthide = getWindow().getDecorView();
+    if (focuschange) {
+        objecthide.setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
 
-    
+    }
+    Log.i(TAG,"Loaded: Fullscreen.");
+}
+//---------------------------------------------------------------//
 
-    //----------------------------------------------------------------------------------------------
+//-----------------------Vibrator service and parameters--------------------------------------//
+private void touchvibrator () {
+    Log.i(TAG, "Start: Vibrator service.");
+    Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        v.vibrate(VibrationEffect.createOneShot(100, VibrationEffect.DEFAULT_AMPLITUDE));
+    } else {
+        v.vibrate(100);
+    }
+    Log.i(TAG, "Loaded: Vibrator service.");
+}
+//--------------------------------------------------------------------------------------------//
 
-    
 
     public class GetGlobal implements Runnable {
 
