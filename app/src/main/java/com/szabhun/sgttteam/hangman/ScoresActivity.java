@@ -17,6 +17,24 @@ public class ScoresActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scores);
+        //---------------------------//
+        MLayouts = findViewById(R.id.Score_MasterLayout);
+        MLayouts.setBackgroundResource(R.drawable.crumpedpaperbackgroundflipped);
+
+        GlobalVariables globalvariables=(GlobalVariables)getApplication();
+
+        String tmp = globalvariables.getScore();
+        try
+        {
+            score = Integer.parseInt(tmp);
+        }
+        catch (Exception e)
+        {
+
+        }
+
+        src = findViewById(R.id.ScoreViewM);
+        src.setText(tmp);
 
     }
 }
