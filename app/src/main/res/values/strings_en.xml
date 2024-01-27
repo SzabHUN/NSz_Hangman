@@ -1,0 +1,44 @@
+<resources>
+    //Other
+    <string name="app_name">Hangman</string>
+
+    //activity_menu.xml
+    <string name="en_menu_bt_1_NewGame">NEW GAME</string>
+    <string name="en_menu_bt_2_Scores">SCORES</string>
+    <string name="en_menu_bt_3_Options">OPTIONS</string>
+    <string name="en_menu_bt_4_About">ABOUT</string>
+    <string name="en_menu_bt_5_Exit">EXIT</string>
+
+    //activity_options.xml
+    <string name="opt_sounds">SOUNDS</string>
+
+    <string name="opt_chs">LANGUAGE</string>
+    <string name="opt_flg_eng">English</string>
+    <string name="opt_flg_hun">Hungarian</string>
+
+    <string name="opt_difficulty_chs">DIFFICULTY</string>
+    <string name="opt_difficulty_easy">Easy</string>
+    <string name="opt_difficulty_normal">Normal</string>
+    <string name="opt_difficulty_hard">Hard</string>
+
+    <string name="opt_language">com.szabhun.sgttteam.hangman.opt_language</string>
+    <string name="opt_muteunmute">com.szabhun.sgttteam.hangman.opt_muteunmute</string>
+    <string name="opt_difficulty">com.szabhun.sgttteam.hangman.opt_difficulty</string>
+
+    //activity_scores.xml
+
+    //activity_about
+    <string name="Crds">This game was created by:</string>
+
+    <string name="Sz_n">SzabHUN</string>
+    <string name="Sz_t">Programmer</string>
+
+    <string name="Sp_n">Sprotni</string>
+    <string name="Sp_t">Lead Programmer</string>
+
+    <string name="L_n">Lolly</string>
+    <string name="L_t">Designer</string>
+
+    <string name="AB_Desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus augue ante, viverra eu metus tincidunt, aliquam accumsan nibh. Aliquam tincidunt placerat porttitor. Mauris diam risus, posuere in purus at, tincidunt ultrices sapien. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Duis pellentesque auctor finibus. Cras vestibulum vitae enim nec maximus. Ut luctus purus vel pulvinar sodales.</string>
+
+</resources>

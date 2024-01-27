@@ -1,0 +1,597 @@
+2019.06.08. 14:42 - Sprotni
+
+- Created Changelog.dat file (Does not affect application.)
+- Changed OnClick to onClick in activity_main.xml.
+- Changed "public void Reset" to "private void Reset" (I don't know if it's right. )
+- Replaced the missing "(View view)" lines.
+- Added auto fullscreen in onCreate method
+- Changed Style AppTheme --> Style NoActionBar in AndroidManifest.xml
+                             (I hope this will be good for us... :) )
+- Added Vibrator motor permission in AndroidManifest.xml -- VIBRATE
+- Added Vibrator motor variable in MainActivity.java -- touchvibrator();
+- Added Button new function Vibrate 100ms
+- Tested app my phone... too slow... coming soon... (Big resource files?!)
+- Tested app virtual phone... normal speed... (I do not understand...)
+- Upgraded project "min 14 API level Android 4.0" --> "min 22 API level Android 5.1"
+                                                      (More features available coming...)
+
+    NOTE:
+
+		-the different speed may be the cause of the phone having
+		    a much weaker GPU than te PC could provide to the VM, to simulate a phone
+
+
+
+2019.06.08. 19:55 - SzabHUN
+
+- Added a total of 24 ImageViews, to have a space for the word to be guessed
+- Added HangmanAlpha.png to the project
+- Added underscores as placeholders so the user can see the length of the word
+- Added 10 word to start off
+- Added more bugs to be fixed (or it may be a problem on my part,
+    the change of API ruined my side of the debugging)
+
+    NOTE:
+
+
+
+2019.06.08. 22:33 - Sprotni
+
+- Added LOGCAT to code (Test function)
+- Disabled screen rotation MainActivity.java--> always portrait in AndroidManifest.xml
+
+    NOTE:
+
+
+
+2019.06.09. 19:31 - Sprotni
+
+- Added OpenerActivity.java fullscreen
+- Added OpenerActivity changer timer
+- Added splashscreen logo
+- Added version number y:m:d:h:m V1906091931
+- Disabled screen rotation OpenerActivity.java--> always portrait in AndroidManifest.xml
+- Added OpenerActivity background image photoshop files
+- Added OpenerActivity fonts photoshop files
+
+    NOTE:
+
+
+
+2019.06.09. 23:34 - SzabHUN
+
+- Added the pairing of the rest of the UI elements
+- Edited the size of the UI element
+- Every button can only be pressed, if it wasn't used already
+- Expanded the Reset() function
+- Tried to implement a way to read from the strings.xml file, failed attempt.
+- Starting to lose the will to live...
+- The Hanged Man CAN appear now
+- The Hanged Man now can hang himself!!!
+- TODO: the letters still need to appear after a right answer was given ---------------------- Done.
+
+    NOTE:
+
+        - the current placeholder word that needs to be guessed is "HANGMAN"
+        - there is no exit if all the lives had been lost,
+            so it will definitely crash if more than 7 wrong answers are given
+        - TODO: make an exit and a lock on the buttons when all lives are lost --------------- Done.
+
+
+
+2019.06.10. 01:25 - SzabHUN
+
+- Added "victory screen"
+- Added "defeat screen"
+- Added feature that locks all the button is the game is over
+- Regained the will to live.
+- Prevented the player from continuing playing if the game is over, either by victory or defeat
+- Made the game playable! (as playable as it gets at this point in time...)
+
+    NOTE:
+
+        - haven't found the version number in the source, I can't edit it :P
+        - the letters that appear when it is guessed are to thin, may need a re-design
+        - TODO: read from strings.xml -------------------------------------------------------- Done.
+        - TODO: hire a designer -------------------------------------------------------------- Done.
+        - TODO: make the main thread do less of the processing ------------------------------- Done.
+
+
+
+2019.06.10. 14:09 - Sprotni
+
+- Added editable version number in activity_opener.xml
+- Moved words to new "values string file" words.xml
+- Edited space size in activity_main.xml
+- Updated activity_opener.xml background image (no static version number)
+
+    NOTE:
+
+        - Try random selection from the string array.
+
+
+
+2019.06.10. 16:20 - SzabHUN
+
+- Added the ability to read from the words.xml file
+    - It also should be dynamic so if there would be more words added,
+        the program SHOULD run fine...
+
+
+
+2019.06.10. 19:42 - Sprotni
+
+- Added new Activity "MenuActivity" coming soon...
+
+    NOTE:
+
+        - I'll continue this later ...
+
+
+
+2019.06.10. 22:17 - SzabHUN
+
+- Added a few more words to the pile [now there is a total of 165]
+    ... I may come back to this later... to add a FEW more.... (end goal 500)
+- Added a Clear Screen button that resets the screen, but does not change the actual word
+- Added a newWord function to generate a new word without re-opening the application
+- Added a Toast to show the word that was suppose to be guessed
+
+
+
+    NOTE:
+
+        - It usually skips 175 frames when a new word is declared & 30-70 frames
+            when a button is pressed
+        - The log now shows the current selected word as well
+		- PS: I looked it up and Krita CAN use photoshop brushes,
+		    so I can share it with our designer
+
+
+
+2019.06.11. 07:21 - SzabHUN
+
+- Added a TON of new words to the words.xml file and created a hungarian version of it
+    with like 1/5 of the words there
+
+	NOTE:
+
+		- it could be easier to find HUN. words that are the max length of 8...
+
+
+
+2019.06.11. 12:23 - SzabHUN
+
+- Added a new class, called ResetAll, without breaking the whole application... huraaay...
+
+    NOTE:
+
+        - It made next to no difference in the speed of the app, and also made a backup copy,
+            just in case...
+		- I made multiple copies of the code before changing it:
+			- 1 is next to the now edited code
+			- 1 is in a backup folder that contains the whole app as well
+			- 1 is on my main PC
+
+		- TODO: IDLE ANIMATION ------------------------------------------------------------ On Hold.
+        - TODO: find a way to be useful once again... o_o ----------------------- I think its done?!
+
+
+
+2019.06.12. 21:43 - Sprotni
+
+- Fixed all activity_main.xml error... (~60-80 errors solved)
+
+2019.06.13 13:40 - Sprotni
+
+- Edited activity_menu.xml
+- Edited MenuActivity.java
+- Edited OpenerActivity.java
+- Changed default Opener start screen
+- Added strings (categorized)
+- Added menu_bt_1.png
+- Added menu_bt_2.png
+- Added menu_bt_3.png
+- Added menu_bt_4.png
+- Added menu_bt_5.png
+- Added Photoshop files and fonts to #Photoshop folder
+- Renamed MainActivity.java to GameActivity.java
+
+    NOTE:
+
+     - I'll continue this later ...
+
+
+
+2019.06.13. 19:11 - Sprotni
+
+- Changed Menu screen fix portrait
+
+        NOTE:
+
+         - Some devices have very fast application ...
+
+
+
+2019.06.13. 23:01 - SzabHUN
+
+- About to start something that will make the program not work as it is doing it now
+    - I hate myself...  (still...)
+    - Lost the will to exist...  (again...)
+
+        NOTE:
+
+            - this will be catastrophic if it won't work....
+
+        Update:
+            2019.06.14 00:20
+                - successful pair of UI elments in ImageView
+                - failure pair in UI elements in Buttons
+                    - fixed @ 00:35 - Reason: stack overflow, by one...
+
+
+
+2019.06.14. 00:40 - SzabHUN
+
+- Regained the wil to exist...  (again...)
+- Optimised the code, it runs MUCH faster, still chugs at certain points...
+    - like after MarkingTheSpaceForTheWord() ended
+
+    NOTE:
+
+        - The comments of the codefrom before can ALL be deleted,
+            along with the "public void reset" function
+        - TODO: add animation on the menu when texture is received ------------------------ On Hold.
+
+
+
+2019.06.14. 16:43 - Sprotni
+
+- Using Java instead of XML ... View the MenuActivity.java file.
+- I started in GameActivity.java, but I couldn't finish it ... keep thinking or continue.
+
+    NOTE:
+
+        - Maybe the app would be faster.
+
+
+
+2019.06.15. 00:40 - SzabHUN
+
+- Almost broke EVERYTHING ... as usual...
+- Made the GameActivity.java too fast, things finished in the wrong order,
+    and that caused the buttons to not get their ImageResources... Sad...
+    - I added 4 seconds of delay so this won't happen until we find a way to fix it
+
+    NOTE:
+
+        - TODO: tweak/remove that 4 second delay and/or fix the code ------------------------- Done.
+        - TODO: mark all " TODO: " lines accordingly ----------------------------------------- Done.
+
+
+
+2019.06.17. 23:25 - SzabHUN
+
+- Ran out of ideas
+- Fixed the resetting order
+
+    NOTE:
+
+        - I have no idea about what or how to do next...
+        - TODO: use less " TODO: " -s in the notes... ---------------------------------In Progress!?
+
+
+
+2019.06.19. 12:09 - SzabHUN
+
+- Tried to add PlaySound when a button is pressed - something went wrong and it crashes the program
+- Added a SoundFile for the SoundEffect for the ButtonPress action, in GameActivity.java
+
+    NOTE:
+
+    - I left it broken so that I can later I can further suffer from the inconsistency of AS........
+    . I gadly accept help in that front, btw
+
+
+
+2019.06.24. 18:33 - SzabHUN
+
+- Updated the version number................. yeah.... progress..... yeeey......
+
+    NOTE:
+        -No but really nothing else happened....
+
+
+2019.06.24 19:38 - SzabHUN
+
+- Added three different JAVA classes to call in when a button is pressed
+    the idea is:
+                 there would be 3 classes and when the user activates multiple buttons,
+                 then it will lock itself down (the class) and run the check with the given
+                 button prompt, after that is done, it will unlock itself
+                 so that it may accept another input from he user
+
+                 since there is 3 different ones, while one is working,
+                 the others are still available to do the same task that the 1st one does.
+
+                 example:
+
+                 -5 rapid inputs from the user;
+                 -the first button pressed will use the first available class
+                 -since the forst one is now locked, it will go for the next one, and so on...
+                 -now there are no class that is able to be used in the current point in time
+                 -since it couldn't process the button press, it will stay in an infinite loop
+                    until it will be able to run itself
+
+
+
+
+2019. 06. 28 09:34 - Sprotni
+
+- Whaaao-Whaaooo.... talk me Discord... your code complicated. :D
+- Tested app ... slow.... Sony Xperia XA2 Ultra
+- I'll continue my code soon...
+- Please use more comments to your code ...
+- And if not every button would don't be a separate void?
+- Let's try this again ...
+- I think we should make a copy of this project and redesign the entire GameActivity.
+- If you think this is a good idea, write to me!
+
+    NOTE:
+
+
+
+2019.06.28. 12:14 - SzabHUN
+
+- Removed 26 public voids for each of the buttons
+- Added 1 single public void for all  the buttons
+
+    NOTE:
+
+        - App still runs at the same speed, but now it won't get worse, and for that matter better
+            when the app is running
+
+
+
+2019.07.09. 16:33 - SzabHUN
+
+- Added stuff to the Activity_About.xml
+- Forgot to add the background so it has to be re-designed - redone.
+
+    NOTE:
+
+        - Obvious placeholders are obvious...
+
+
+2019.07.11. 20:39 - SzabHUN
+
+- Added basic visuals to Activity_Options.xml
+
+    NOTE:
+
+        - Waiting on further feedback to continue...
+        - Obvious placeholders are still obvious...
+
+
+2019.07.12. 04:18 - SzabHUN
+
+- Added a primitive version of the language changer, that currently only effects the OptionsActivity
+- Added a copy of strings.xml, strings_hu.xml to the values folder.
+
+
+    NOTE:
+
+        - The AS throws a tantrum whenever there are duplicates of the same string variable names
+            in the same project, even in multiple string.xml files so there should be a "hu_" prefix
+            before each string variable name in the strings_hu.xml file
+
+        - Obvious placeholders are still obvious.... we may want to hire a designer or something....
+
+2019.07.17. 01:28 - SzabHUN
+
+- Making the idea a possibility, requires further work, TODO:this-------------------Still-On-The-Way
+
+    NOTE:
+
+        - I think I lost my thought process through this... - SzabHUN 2019.07.27 15:43
+
+2019.07.27. 16:55 - SzabHUN
+
+-Added the Hungarian version of the GameActivity.java & activity_main.xml
+-further Resources are still required, like the Hungarian letters AND
+                                          TODO: finish the about screen,------------------On-The-Way
+                                          TODO: need feedback on what pictures to use in the credits
+                                           (and if I will be the one doing the design or not...)
+
+    NOTE:
+
+        -looks good, but haven't tested it, because we still need to implement that universal var...
+         (there is no way to get to it in the first place,
+         I'm waiting until that LNG var will be functional {I gave up on that} )
+
+2019.08.05. 20:39 - Sprotni
+
+- Added version code and version name to AboutActivity.java and activity_about.xml
+- Optimized all resource... all letters, all backrounds, all buttons, all hangmans, all underscores... Oh yes!!!
+- Fixed slow activity and game
+- Edited activity_about.xml
+- Tested Sony Xperia XA2 Ultra, VM, Sony Xperia X Compact, Honor 7
+- Update version code from gradle configuration (build.gradle file)
+
+    NOTE:
+
+        - letters max size 256x256
+        - backgrounds max size 500x1000
+        - I will continue soon, it took my day ....
+
+2019.08.06. 20:16 - Sprotni
+
+- Added button event sound btpresswav.wav
+- Categorized resource files...
+- Reset Version_Code and Version_Name
+
+    NOTE:
+
+        -tested on Samsung Galaxy A5 and the sound effect only plays a set amout of time
+
+2019.08.07. 10:01 - Sprotni
+
+- Removed no usages files and lines
+- Removed menu buttons
+- Added strings menu buttons
+- Added custom fonts to project app>assets>fonts (.ttf file formats)
+- Added dynamic menu buttons
+- Resized menu buttons
+
+
+    NOTE:
+
+        - The letters that appear should be like this ... GameActivity...No Images No Problems...
+        - I have a good idea ...
+        - The strings on the UI are directly specified. This makes the look easier to understand.
+
+2019.08.07. 15:19 - Sprotni
+
+- Added GlobalVariables class (Yupiii!)
+- Default language EN (debug)
+- Working Options language change
+- Added Multilanguage menu
+
+    NOTE:
+
+        - I hope you understand how it works. // I hope too
+        - I'm very tired ...
+
+2019.08.09. 00:19 - Sprotni
+
+- Added new GlobalVariable (muteunmute)
+- Added new options language flags
+- Added new mute and unmute icons
+- Added new Sound options
+- Added fullscreen to Options activity
+- Default sound UNMUTE (debug)
+
+    NOTE:
+
+        - Try it and send feedback... // oh... so this is.. WAS a thing... whoops...
+
+2019.09.20. 15:14 - SzabHUN
+
+-Started working on HunGameActivity | the app crashes if I try to launch it
+-Introduced a new file: word_tier_list.xml - it a collective xml with all the words inside it
+ (not yet)
+
+    NOTE:
+
+2019.09.20. 15:14 - Sprotni
+
+- Crashes ... unkown code in app source....
+
+    NOTE: That's why you just need an android studio!
+
+2019.09.22. 19:38 - Sprotni
+
+- Renamed HunGameActivity.java.disable
+- Added SharedPreferences.... to be contiuned...
+
+    NOTE:
+
+2019.09.25. 00:48 - Sprotni
+
+- WORKING OPTIONS MENU.... :D
+- Save preferences after exit game
+
+    NOTE:   - SharedPreferences..... Shit Shit Shit......
+            - It took me 4 hours to figure out how this shit works.
+
+2019.09.25. 16:21 - Sprotni
+
+- Added mute unmute buttons
+- Added multilanguage Opener
+- Added multilanguage Menu
+- Added multilanguage About
+- Added multilanguage Options
+- Mute and unmute working: Game,Menu,Options,
+- Clean code...
+
+    NOTE:
+
+2019.09.28. 12:44 - Sprotni
+
+- Added Game background music...
+
+    Note:  Not perfect yet, but a mute works!
+
+2019.10.04. 16:19 - SzabHUN
+
+-Adding Core system
+
+    NOTE:
+
+2019.10.14. 14:36 - SzabHUN
+
+-Added score basics, it can and will be improved
+
+    NOTE:
+        - will be back to finish the difficulty, but I can't make the diff selector panel
+            I will refer to a idea in the MenuActivity.java
+
+2019.11.04. 13:30 - SzabHUN
+
+-Fixed the score view on the return to the "new game" activity
+
+    NOTE:
+
+2019.12.22. 19:25 - Sprotni
+
+-Redesigned & reworked the options menu
+-Implemented the difficulty system - "normal" by default
+
+    NOTE:
+        - I will soon try to make something of this, but it won't save the highscore after
+	    closing the program yet - SzabHUN
+
+//----------------2019----------------------------------------------------------------------------\\
+//------------------------------------------------------------------------------------------------\\
+//----------------2020----------------------------------------------------------------------------\\
+
+2020.01.10. 12:10 - SzabHUN
+
+-Revisited the scoring system - Need to decide on WHEN to save the score
+-Started working on a score saving system
+
+    NOTE:
+        -omfg what happened in the options.java jeez
+        -a minor inconvenience: the difficulty still needs to be implemented into the game.java
+
+2020.01.10. 18:27 - SzabHUN
+
+-Difficulty settings are working.
+
+    NOTE:
+
+2020.01.13. 19:21 - SzabHUN
+
+-Moved the point adding system so it will add points for each letter that is (a duplicate) in the word
+-Fixed the loosing streak so it resets after a win - like a STREAK should...
+-Did a tinybit of balancing including the loosing streak - it will reset your score after 7 attempt instead of 3
+
+    NOTE:
+
+2020.01.27. 09:40 - SzabHUN
+
+-Done the Python script to categorise the words
+-Implemented the new words.xml to the app
+-Added Log to the Settings screen
+
+    NOTE:
+
+2020.01.27. 13:07 - SzabHUN
+
+-Reworked the Mute button in the settings
+
+    NOTE:
+
+2020.02.03. 22:26 - Sprotni
+
+-I tested the one you made Mute button... I have a question about...

@@ -1,0 +1,41 @@
+<resources>
+    //Other
+    <string name="hu_app_name">Akasztófa</string>
+
+    //activity_menu.xml
+    <string name="hu_menu_bt_1_NewGame">Játék Kezdése</string>
+    <string name="hu_menu_bt_2_Scores">Pontszámok</string>
+    <string name="hu_menu_bt_3_Options">Beállítások</string>
+    <string name="hu_menu_bt_4_About">Rólunk</string>
+    <string name="hu_menu_bt_5_Exit">Kilépés</string>
+
+    //activity_options.xml
+
+    <string name="hu_opt_sounds">HANGOK</string>
+
+    <string name="hu_opt_chs">NYELV</string>
+    <string name="hu_opt_flg_eng">Angol</string>
+    <string name="hu_opt_flg_hun">Magyar</string>
+
+    <string name="hu_opt_difficulty_chs">NEHÉZSÉG</string>
+    <string name="hu_opt_difficulty_easy">Könnyű</string>
+    <string name="hu_opt_difficulty_normal">Normál</string>
+    <string name="hu_opt_difficulty_hard">Nehéz</string>
+
+    //activity_scores.xml
+
+    //activity_about
+    <string name="hu_Crds">A játékot készítette:</string>
+
+    <string name="hu_Sz_n">SzabHUN</string>
+    <string name="hu_Sz_t">Programozó</string>
+
+    <string name="hu_Sp_n">Sprotni</string>
+    <string name="hu_Sp_t">Vezető programozó</string> //should we translate the tiltes?
+
+    <string name="hu_L_n">Lolly</string>
+    <string name="hu_L_t">Grafikus</string>
+
+    <string name="hu_AB_Desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus augue ante, viverra eu metus tincidunt, aliquam accumsan nibh. Aliquam tincidunt placerat porttitor. Mauris diam risus, posuere in purus at, tincidunt ultrices sapien. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Duis pellentesque auctor finibus. Cras vestibulum vitae enim nec maximus. Ut luctus purus vel pulvinar sodales.</string>
+
+</resources>

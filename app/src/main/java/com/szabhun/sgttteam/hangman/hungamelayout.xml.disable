@@ -1,0 +1,648 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/GameH_MLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="bottom|center"
+    android:orientation="vertical"
+    tools:context=".HunGameActivity"
+    tools:ignore="UselessParent">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/bt_Clear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="ClearScreen" />
+
+        <ImageView
+            android:id="@+id/Hangman"
+            android:layout_width="216dp"
+            android:layout_height="216dp"
+            android:contentDescription="@null" />
+
+        <Button
+            android:id="@+id/bt_NewWord"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="NewWord" />
+    </LinearLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="5dp" />
+
+    <TableLayout
+        android:id="@+id/TableLayout_SpaceForTheWord"
+        android:layout_width="wrap_content"
+        android:layout_height="128dp">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/LetterView00"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:contentDescription="@null" />
+
+                <ImageView
+                    android:id="@+id/LetterView01"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:contentDescription="@null" />
+
+                <ImageView
+                    android:id="@+id/LetterView02"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:contentDescription="@null" />
+
+                <ImageView
+                    android:id="@+id/LetterView03"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:contentDescription="@null" />
+
+                <ImageView
+                    android:id="@+id/LetterView04"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:contentDescription="@null" />
+
+                <ImageView
+                    android:id="@+id/LetterView05"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:contentDescription="@null" />
+
+                <ImageView
+                    android:id="@+id/LetterView06"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:contentDescription="@null" />
+
+                <ImageView
+                    android:id="@+id/LetterView07"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:contentDescription="@null" />
+            </LinearLayout>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/LetterView10"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:contentDescription="@null" />
+
+                <ImageView
+                    android:id="@+id/LetterView11"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:contentDescription="@null" />
+
+                <ImageView
+                    android:id="@+id/LetterView12"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:contentDescription="@null" />
+
+                <ImageView
+                    android:id="@+id/LetterView13"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:contentDescription="@null" />
+
+                <ImageView
+                    android:id="@+id/LetterView14"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:contentDescription="@null" />
+
+                <ImageView
+                    android:id="@+id/LetterView15"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:contentDescription="@null" />
+
+                <ImageView
+                    android:id="@+id/LetterView16"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:contentDescription="@null" />
+
+                <ImageView
+                    android:id="@+id/LetterView17"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:contentDescription="@null" />
+
+            </LinearLayout>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/LetterView20"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:contentDescription="@null" />
+
+                <ImageView
+                    android:id="@+id/LetterView21"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:contentDescription="@null" />
+
+                <ImageView
+                    android:id="@+id/LetterView22"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:contentDescription="@null" />
+
+                <ImageView
+                    android:id="@+id/LetterView23"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:contentDescription="@null" />
+
+                <ImageView
+                    android:id="@+id/LetterView24"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:contentDescription="@null" />
+
+                <ImageView
+                    android:id="@+id/LetterView25"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:contentDescription="@null" />
+
+                <ImageView
+                    android:id="@+id/LetterView26"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:contentDescription="@null" />
+
+                <ImageView
+                    android:id="@+id/LetterView27"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:contentDescription="@null" />
+            </LinearLayout>
+        </TableRow>
+
+    </TableLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="15dp" />
+
+    <TableLayout
+        android:id="@+id/TableLayout_Letters"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="bottom|center">
+
+        <TableRow
+            android:id="@+id/Tbl_rw_A_to_E2"
+            android:layout_width="330dp"
+            android:layout_height="55dp"
+            android:gravity="center">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/BT_A"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_weight="1"
+                    android:onClick="AnyButtonIsPressed" />
+
+                <Button
+                    android:id="@+id/BT_A2"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_weight="1"
+                    android:onClick="AnyButtonIsPressed" />
+
+                <Button
+                    android:id="@+id/BT_B"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_weight="1"
+                    android:onClick="AnyButtonIsPressed" />
+
+                <Button
+                    android:id="@+id/BT_C"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_weight="1"
+                    android:onClick="AnyButtonIsPressed" />
+
+                <Button
+                    android:id="@+id/BT_D"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_weight="1"
+                    android:onClick="AnyButtonIsPressed" />
+
+                <Button
+                    android:id="@+id/BT_E"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_weight="1"
+                    android:onClick="AnyButtonIsPressed" />
+
+                <Button
+                    android:id="@+id/BT_E2"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_weight="1"
+                    android:onClick="AnyButtonIsPressed" />
+
+            </LinearLayout>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/Tbl_rw_F_to_J"
+            android:layout_width="wrap_content"
+            android:layout_height="55dp"
+            android:gravity="center">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/BT_F"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_weight="1"
+                    android:onClick="AnyButtonIsPressed" />
+
+                <Button
+                    android:id="@+id/BT_G"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_weight="1"
+                    android:onClick="AnyButtonIsPressed" />
+
+                <Button
+                    android:id="@+id/BT_H"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_weight="1"
+                    android:onClick="AnyButtonIsPressed" />
+
+                <Button
+                    android:id="@+id/BT_I"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_weight="1"
+                    android:onClick="AnyButtonIsPressed" />
+
+                <Button
+                    android:id="@+id/BT_I2"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_weight="1"
+                    android:onClick="AnyButtonIsPressed" />
+
+                <Button
+                    android:id="@+id/BT_J"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_weight="1"
+                    android:onClick="AnyButtonIsPressed" />
+
+            </LinearLayout>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/Tbl_rw_K_to_O4"
+            android:layout_width="wrap_content"
+            android:layout_height="55dp"
+            android:gravity="center">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/BT_K"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_weight="1"
+                    android:onClick="AnyButtonIsPressed" />
+
+                <Button
+                    android:id="@+id/BT_L"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_weight="1"
+                    android:onClick="AnyButtonIsPressed" />
+
+                <Button
+                    android:id="@+id/BT_M"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_weight="1"
+                    android:onClick="AnyButtonIsPressed" />
+
+                <Button
+                    android:id="@+id/BT_N"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_weight="1"
+                    android:onClick="AnyButtonIsPressed" />
+
+                <Button
+                    android:id="@+id/BT_O"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_weight="1"
+                    android:onClick="AnyButtonIsPressed" />
+
+                <Button
+                    android:id="@+id/BT_O2"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_weight="1"
+                    android:onClick="AnyButtonIsPressed" />
+
+                <Button
+                    android:id="@+id/BT_O3"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_weight="1"
+                    android:onClick="AnyButtonIsPressed" />
+
+                <Button
+                    android:id="@+id/BT_O4"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_weight="1"
+                    android:onClick="AnyButtonIsPressed" />
+
+            </LinearLayout>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/Tbl_rw_P_to_T"
+            android:layout_width="wrap_content"
+            android:layout_height="55dp"
+            android:gravity="center">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/BT_P"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_weight="1"
+                    android:onClick="AnyButtonIsPressed" />
+
+                <Button
+                    android:id="@+id/BT_Q"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_weight="1"
+                    android:onClick="AnyButtonIsPressed" />
+
+                <Button
+                    android:id="@+id/BT_R"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_weight="1"
+                    android:onClick="AnyButtonIsPressed" />
+
+                <Button
+                    android:id="@+id/BT_S"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_weight="1"
+                    android:onClick="AnyButtonIsPressed" />
+
+                <Button
+                    android:id="@+id/BT_T"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_weight="1"
+                    android:onClick="AnyButtonIsPressed" />
+
+            </LinearLayout>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/Tbl_rw_U_to_W"
+            android:layout_width="220dp"
+            android:layout_height="55dp"
+            android:gravity="center">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/BT_U"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_weight="1"
+                    android:onClick="AnyButtonIsPressed" />
+
+                <Button
+                    android:id="@+id/BT_U2"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_weight="1"
+                    android:onClick="AnyButtonIsPressed" />
+
+                <Button
+                    android:id="@+id/BT_U3"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_weight="1"
+                    android:onClick="AnyButtonIsPressed" />
+
+                <Button
+                    android:id="@+id/BT_U4"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_weight="1"
+                    android:onClick="AnyButtonIsPressed" />
+
+                <Button
+                    android:id="@+id/BT_V"
+                    style="?android:attr/borderlessButtonStyle"
+
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_weight="1"
+                    android:onClick="AnyButtonIsPressed" />
+
+                <Button
+                    android:id="@+id/BT_W"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_weight="1"
+                    android:onClick="AnyButtonIsPressed" />
+
+            </LinearLayout>
+        </TableRow>
+
+    </TableLayout>
+
+    <TableRow
+        android:id="@+id/Tbl_rw_X_to_Z"
+        android:layout_width="330dp"
+        android:layout_height="55dp"
+        android:gravity="center|top">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/BT_X"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:layout_weight="1"
+                android:onClick="AnyButtonIsPressed" />
+
+            <Space
+                android:layout_width="20dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/BT_Y"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:layout_weight="1"
+                android:onClick="AnyButtonIsPressed" />
+
+            <Space
+                android:layout_width="20dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/BT_Z"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:layout_weight="1"
+                android:onClick="AnyButtonIsPressed" />
+        </LinearLayout>
+    </TableRow>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="67dp" />
+
+</LinearLayout>

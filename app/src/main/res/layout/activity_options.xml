@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/LLayout"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/crumpedpaperbackgroundflipped"
+    android:gravity="center"
+    tools:context=".OptionsActivity">
+
+    <LinearLayout
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/space"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:background="@drawable/opt_horizontal_line" />
+
+        <TextView
+            android:id="@+id/TV_OPT_CHNG_DIF"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/opt_difficulty_chs"
+            android:textAlignment="center"
+            android:textColor="@color/TextColor"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/BT_OPT_DIF_EASY"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:background="@drawable/opt_checkbox"
+                    android:onClick="OnButtonClick" />
+
+                <TextView
+                    android:id="@+id/TV_OPT_DIFTXT_EASY"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/opt_difficulty_easy"
+                    android:textAlignment="center"
+                    android:textColor="@color/TextColor"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/BT_OPT_DIF_NORMAL"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:background="@drawable/opt_checkbox"
+                    android:onClick="OnButtonClick" />
+
+                <TextView
+                    android:id="@+id/TV_OPT_DIFTXT_NORMAL"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/opt_difficulty_normal"
+                    android:textAlignment="center"
+                    android:textColor="@color/TextColor"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/BT_OPT_DIF_HARD"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:background="@drawable/opt_checkbox"
+                    android:onClick="OnButtonClick" />
+
+                <TextView
+                    android:id="@+id/TV_OPT_DIFTXT_HARD"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/opt_difficulty_hard"
+                    android:textAlignment="center"
+                    android:textColor="@color/TextColor"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/space2"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:background="@drawable/opt_horizontal_line" />
+
+        <TextView
+            android:id="@+id/OPT_TV_CHNG_LNG"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/opt_chs"
+            android:textAlignment="center"
+            android:textColor="@color/TextColor"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/BT_OPT_FLG_ENG"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:background="@drawable/flagen"
+                    android:onClick="OnButtonClick" />
+
+                <TextView
+                    android:id="@+id/TV_OPT_FLGTXT_ENG"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/opt_flg_eng"
+                    android:textAlignment="center"
+                    android:textColor="@color/TextColor"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/BT_OPT_FLG_HUN"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:background="@drawable/flaghu"
+                    android:onClick="OnButtonClick" />
+
+                <TextView
+                    android:id="@+id/TV_OPT_FLGTXT_HUN"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/opt_flg_hun"
+                    android:textAlignment="center"
+                    android:textColor="@color/TextColor"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+        <ImageView
+            android:id="@+id/space3"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:background="@drawable/opt_horizontal_line" />
+
+        <TextView
+            android:id="@+id/OPT_TV_SOUNDS"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/opt_sounds"
+            android:textAlignment="center"
+            android:textColor="@color/TextColor"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/BT_OPT_SOUND_MUTE"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:background="@drawable/mute"
+                    android:onClick="OnButtonClick" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/BT_OPT_SOUND_UNMUTE"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:background="@drawable/unmute"
+                    android:onClick="OnButtonClick" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/space4"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:background="@drawable/opt_horizontal_line" />
+
+        <Button
+            android:id="@+id/BT_OPT_SOUND_UNIVERSAL"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:background="@drawable/unmute"
+            android:onClick="OnButtonClick" />
+
+    </LinearLayout>
+
+</LinearLayout>

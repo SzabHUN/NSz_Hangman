@@ -1,0 +1,1282 @@
+package com.szabhun.sgttteam.hangman;
+
+import android.content.Context;
+import android.content.res.Resources;
+import android.media.MediaPlayer;
+import android.os.Build;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.util.Log;
+import android.widget.LinearLayout;
+import android.widget.Toast;
+
+
+import java.util.Random;
+
+
+@SuppressWarnings("ALL")
+public class HunGameActivity extends AppCompatActivity {
+
+    //there are 26 letters in the english alphabet
+    //there will be 7 parts to the Hanged Man
+
+    //Button la,lb,lc,ld,le,lf,lg,lh,li,lj,lk,ll,lm,ln,lo,lp,lq,lr,ls,lt,lu,lv,lw,lx,ly,lz;
+    //ImageView l00,l01,l02,l03,l04,l05,l06,l07,l10,l11,l12,l13,l14,l15,l16,l17,l20,l21,l22,l23,l24,l25,l26,l27,hangman;
+
+    ImageView hangman;
+    LinearLayout MhLayout;
+
+    //javafx.scene.control.Button[] - wtf, why? how? when?
+    public Button[] buttons = new Button[37];
+    public ImageView[][] ltrs = new ImageView[3][8];
+
+    public static String abcb = "AÁBCDEÉFGHIÍJKLMNOÓÖŐPQRSTUÚÜŰVWXYZ";
+    public static String abcs = "aábcdeéfghiíjklmnoóöőpqrstuúüűvwxyz";
+
+    private static final String TAG = "loginfo";
+
+    public String guessThisWord = "";
+
+    GlobalVariables globalvariables=(GlobalVariables)getApplication();
+
+    public String difficulty = globalvariables.getDifficulty(); // TODO: make this a global variable - done?!
+
+
+    //-----initiate the playsound-----\\
+    /*
+
+    public final MediaPlayer callSoundButtonPress = MediaPlayer.create(this, R.raw.btpress); // <- cause of error TODO: WORK
+
+    */
+    //----------------------------------\\
+
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_hun_main);
+        Log.i(TAG,"Start: onCreate.");
+
+        MhLayout = findViewById(R.id.GameH_MLayout);
+        MhLayout.setBackgroundResource(R.drawable.crumpedpaperbackgroundflipped);
+        //---------------------------//
+        ResetAll runnable = new ResetAll(); //create reset class
+        //---------------------------//
+        Log.i(TAG,"Start: Pair UI objects.");
+        PairUIElements();
+        //---------------------------//
+        //---------------------------//
+        hangman = findViewById(R.id.Hangman);
+        Log.i(TAG,"Loaded: Pair UI objects.");
+        //---------------------------//
+        //---------------------------//
+        Log.i(TAG,"Start: Full reset.");
+        new Thread(runnable).start();
+        Log.i(TAG,"Finished: Full reset.");
+        //---------------------------//
+        SelectAWord();
+        //---------------------------//
+        MarkingTheSpaceForTheWord();
+        //---------------------------//
+        //---------------------------//
+
+
+
+
+    }
+
+
+    public void PairUIElements ()
+    {
+        //---------------------------//--The-ImageViews--\\
+        Log.i(TAG,"Start: Pair UI objects - ImageView.");
+        for (int i = 0 ; i < 3 ; i++)
+            for (int q = 0 ; q < 8 ; q++)
+            {
+                String ImgvID = "LetterView" + i + q;
+                int resID = getResources().getIdentifier(ImgvID, "id", getPackageName());
+                ltrs[i][q] = findViewById(resID);
+            }
+        Log.i(TAG,"Finished: Pair UI objects - ImageView.");
+        //---------------------------//----The-Buttons----\\
+        Log.i(TAG,"Start: Pair UI objects - Button.");
+        for(int i = 0 ; i < 37 ; i++)
+        {
+            String ButtonID = "BT_" + abcb.toCharArray()[i];
+            int resID = getResources().getIdentifier(ButtonID, "id", getPackageName());
+            buttons[i] = findViewById(resID);
+        }
+        Log.i(TAG,"Finished: Pair UI objects - Button.");
+
+    }
+
+
+    public void NewWord (View view)
+    {
+        //---------------------------//
+        Log.i(TAG,"Start: Full reset.");
+        Reset(); //TODO: duplicate reset?!
+        Log.i(TAG,"Finished: Full reset.");
+        //---------------------------//
+        SelectAWord();
+        //---------------------------//
+        MarkingTheSpaceForTheWord();
+        //---------------------------//
+        points = 0;
+        lives = 9;
+
+    }
+
+    public void ClearScreen (View view)
+    {
+        //---------------------------//
+        Log.i(TAG,"Start: Full reset.");
+        Reset();
+        Log.i(TAG,"Finished: Full reset.");
+        //---------------------------//
+        MarkingTheSpaceForTheWord();
+        //---------------------------//
+        points = 0;
+        lives = 9;
+    }
+
+
+    //-----------------------Fullscreen------------------------------//
+
+    @Override
+    public void onWindowFocusChanged(boolean focuschange) {
+        Log.i(TAG,"Start: Fullscreen.");
+        super.onWindowFocusChanged(focuschange);
+        View objecthide = getWindow().getDecorView();
+        if (focuschange) {
+            objecthide.setSystemUiVisibility(
+                    View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                            | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                            | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                            | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                            | View.SYSTEM_UI_FLAG_FULLSCREEN
+                            | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+
+        }
+        Log.i(TAG,"Loaded: Fullscreen.");
+    }
+    //---------------------------------------------------------------//
+
+    //-----------------------Vibrator service and parameters--------------------------------------//
+    private void touchvibrator () {
+        Log.i(TAG, "Start: Vibrator service.");
+        Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            v.vibrate(VibrationEffect.createOneShot(100, VibrationEffect.DEFAULT_AMPLITUDE));
+        } else {
+            v.vibrate(100);
+        }
+        Log.i(TAG, "Loaded: Vibrator service.");
+    }
+    //--------------------------------------------------------------------------------------------//
+    //----------------------------------------//
+    private void Reset ()
+    {
+        Log.i(TAG,"Start: Reset buttons pair images.");
+        /*
+        la.setBackgroundResource(R.drawable.a);
+        lb.setBackgroundResource(R.drawable.b);
+        lc.setBackgroundResource(R.drawable.c);
+        ld.setBackgroundResource(R.drawable.d);
+        le.setBackgroundResource(R.drawable.e);
+        lf.setBackgroundResource(R.drawable.f);
+        lg.setBackgroundResource(R.drawable.g);
+        lh.setBackgroundResource(R.drawable.h);
+        li.setBackgroundResource(R.drawable.i);
+        lj.setBackgroundResource(R.drawable.j);
+        lk.setBackgroundResource(R.drawable.k);
+        ll.setBackgroundResource(R.drawable.l);
+        lm.setBackgroundResource(R.drawable.m);
+        ln.setBackgroundResource(R.drawable.n);
+        lo.setBackgroundResource(R.drawable.o);
+        lp.setBackgroundResource(R.drawable.p);
+        lq.setBackgroundResource(R.drawable.q);
+        lr.setBackgroundResource(R.drawable.r);
+        ls.setBackgroundResource(R.drawable.s);
+        lt.setBackgroundResource(R.drawable.t);
+        lu.setBackgroundResource(R.drawable.u);
+        lv.setBackgroundResource(R.drawable.v);
+        lw.setBackgroundResource(R.drawable.w);
+        lx.setBackgroundResource(R.drawable.x);
+        ly.setBackgroundResource(R.drawable.y);
+        lz.setBackgroundResource(R.drawable.z);
+        */
+        for (int i = 0; i < 36 ; i++)
+        {
+            /**
+                int resID = getResources().getIdentifier(Character.toString(abcs.toCharArray()[i]), "drawable", getPackageName()); // this took longer than it was soppose to...
+                buttons[i].setBackgroundResource(resID); // plz wrk
+            */
+            buttons[i].setText(abcs.toCharArray()[i]);
+        }
+        Log.i(TAG,"Loaded: Reset buttons pair images.");
+        //---------------------------//
+        Log.i(TAG,"Start: Change buttons to clickable.");
+        /*
+        la.setClickable(true);
+        lb.setClickable(true);
+        lc.setClickable(true);
+        ld.setClickable(true);
+        le.setClickable(true);
+        lf.setClickable(true);
+        lg.setClickable(true);
+        lh.setClickable(true);
+        li.setClickable(true);
+        lj.setClickable(true);
+        lk.setClickable(true);
+        ll.setClickable(true);
+        lm.setClickable(true);
+        ln.setClickable(true);
+        lo.setClickable(true);
+        lp.setClickable(true);
+        lq.setClickable(true);
+        lr.setClickable(true);
+        ls.setClickable(true);
+        lt.setClickable(true);
+        lu.setClickable(true);
+        lv.setClickable(true);
+        lw.setClickable(true);
+        lx.setClickable(true);
+        ly.setClickable(true);
+        lz.setClickable(true);
+        */
+        for (int i = 0 ; i < 26 ; i++)
+            buttons[i].setClickable(true);
+        Log.i(TAG,"Finished: Change buttons to clickable.");
+        //---------------------------//
+        Log.i(TAG, "Start: Reset LetterViews pair images - Image Resource.");
+        /*
+        l00.setImageResource(R.drawable.emptyplaceholder);
+        l01.setImageResource(R.drawable.emptyplaceholder);
+        l02.setImageResource(R.drawable.emptyplaceholder);
+        l03.setImageResource(R.drawable.emptyplaceholder);
+        l04.setImageResource(R.drawable.emptyplaceholder);
+        l05.setImageResource(R.drawable.emptyplaceholder);
+        l06.setImageResource(R.drawable.emptyplaceholder);
+        l07.setImageResource(R.drawable.emptyplaceholder);
+        l10.setImageResource(R.drawable.emptyplaceholder);
+        l11.setImageResource(R.drawable.emptyplaceholder);
+        l12.setImageResource(R.drawable.emptyplaceholder);
+        l13.setImageResource(R.drawable.emptyplaceholder);
+        l14.setImageResource(R.drawable.emptyplaceholder);
+        l15.setImageResource(R.drawable.emptyplaceholder);
+        l16.setImageResource(R.drawable.emptyplaceholder);
+        l17.setImageResource(R.drawable.emptyplaceholder);
+        l20.setImageResource(R.drawable.emptyplaceholder);
+        l21.setImageResource(R.drawable.emptyplaceholder);
+        l22.setImageResource(R.drawable.emptyplaceholder);
+        l23.setImageResource(R.drawable.emptyplaceholder);
+        l24.setImageResource(R.drawable.emptyplaceholder);
+        l25.setImageResource(R.drawable.emptyplaceholder);
+        l26.setImageResource(R.drawable.emptyplaceholder);
+        l27.setImageResource(R.drawable.emptyplaceholder);
+         */
+        for (int i = 0; i < 3 ; i++)
+            for (int q = 0 ; q < 8 ; q++)
+            {
+                String STRemptyplaceholder = "emptyplaceholder";
+                int resID = getResources().getIdentifier(STRemptyplaceholder, "drawable", getPackageName());
+                ltrs[i][q].setImageResource(resID);
+            }
+        Log.i(TAG,"Finished: Reset LetterViews pair images - Image Resource.");
+        //---------------------------//
+        Log.i(TAG, "Start: Reset LetterViews pair images - Background Resource.");
+        /*
+        l00.setBackgroundResource(R.drawable.emptyplaceholder);
+        l01.setBackgroundResource(R.drawable.emptyplaceholder);
+        l02.setBackgroundResource(R.drawable.emptyplaceholder);
+        l03.setBackgroundResource(R.drawable.emptyplaceholder);
+        l04.setBackgroundResource(R.drawable.emptyplaceholder);
+        l05.setBackgroundResource(R.drawable.emptyplaceholder);
+        l06.setBackgroundResource(R.drawable.emptyplaceholder);
+        l07.setBackgroundResource(R.drawable.emptyplaceholder);
+        l10.setBackgroundResource(R.drawable.emptyplaceholder);
+        l11.setBackgroundResource(R.drawable.emptyplaceholder);
+        l12.setBackgroundResource(R.drawable.emptyplaceholder);
+        l13.setBackgroundResource(R.drawable.emptyplaceholder);
+        l14.setBackgroundResource(R.drawable.emptyplaceholder);
+        l15.setBackgroundResource(R.drawable.emptyplaceholder);
+        l16.setBackgroundResource(R.drawable.emptyplaceholder);
+        l17.setBackgroundResource(R.drawable.emptyplaceholder);
+        l20.setBackgroundResource(R.drawable.emptyplaceholder);
+        l21.setBackgroundResource(R.drawable.emptyplaceholder);
+        l22.setBackgroundResource(R.drawable.emptyplaceholder);
+        l23.setBackgroundResource(R.drawable.emptyplaceholder);
+        l24.setBackgroundResource(R.drawable.emptyplaceholder);
+        l25.setBackgroundResource(R.drawable.emptyplaceholder);
+        l26.setBackgroundResource(R.drawable.emptyplaceholder);
+        l27.setBackgroundResource(R.drawable.emptyplaceholder);
+         */
+        for (int i = 0; i < 3 ; i++)
+            for (int q = 0 ; q < 8 ; q++)
+            {
+                String STRemptyplaceholder = "emptyplaceholder";
+                int resID = getResources().getIdentifier(STRemptyplaceholder, "drawable", getPackageName());
+                ltrs[i][q].setBackgroundResource(resID);
+            }
+        Log.i(TAG,"Finished: Reset LetterViews pair images - Background Resource.");
+        //---------------------------//
+        Log.i(TAG, "Start: Reset HangMan image.");
+        hangman.setImageResource(R.drawable.emptyplaceholder);
+        Log.i(TAG,"Finished: Reset HangMan image.");
+        //---------------------------//
+    }
+    //----------------------------------------//
+
+    public void LockAllTheButtons ()
+    {
+        Log.i(TAG,"Start: Locking all the buttons.");
+        /*
+        la.setClickable(false);
+        lb.setClickable(false);
+        lc.setClickable(false);
+        ld.setClickable(false);
+        le.setClickable(false);
+        lf.setClickable(false);
+        lg.setClickable(false);
+        lh.setClickable(false);
+        li.setClickable(false);
+        lj.setClickable(false);
+        lk.setClickable(false);
+        ll.setClickable(false);
+        lm.setClickable(false);
+        ln.setClickable(false);
+        lo.setClickable(false);
+        lp.setClickable(false);
+        lq.setClickable(false);
+        lr.setClickable(false);
+        ls.setClickable(false);
+        lt.setClickable(false);
+        lu.setClickable(false);
+        lv.setClickable(false);
+        lw.setClickable(false);
+        lx.setClickable(false);
+        ly.setClickable(false);
+        lz.setClickable(false);
+         */
+        for (int i = 0 ; i < 26 ; i++)
+            buttons[i].setClickable(false);
+        Log.i(TAG,"Finished: Locking all the buttons.");
+    }
+
+    //----------------------------------------//
+    public void SelectAWord ()
+    {
+/*
+
+        String textureID = abcs.toCharArray()[theIndexOfTheCurrentButton] + "c";
+        int resID = getResources().getIdentifier(textureID, "res", getPackageName());
+ */
+
+        do {
+            Log.i(TAG,"Start: selecting the a random word");
+            Resources res = getResources();
+            String[] words ;
+            if (difficulty == "easy")
+            {
+                words = res.getStringArray(R.array.hun_easy);
+            }
+            else if (difficulty == "normal")
+            {
+                words = res.getStringArray(R.array.hun_normal);
+            }
+            else
+            {
+                words = res.getStringArray(R.array.hun_hard);
+            }
+            Log.i(TAG, "Loaded: a total of "+words.length+" words");
+            Random rnd = new Random();
+            guessThisWord = words[rnd.nextInt(words.length)];
+            Log.i(TAG, "The selected word is: " + guessThisWord);
+        } while (guessThisWord.length() > 9);
+        Log.i(TAG,"Finished: selecting the a random word");
+
+    }
+    //----------------------------------------//
+
+    public int  points = 0;
+
+    public Boolean letMeGo = false;
+
+    //----------------------------------------//
+    public void MarkingTheSpaceForTheWord()
+    {
+        for (int i = 0; i < 2 ; i++)
+        {
+            if (letMeGo == false)
+            {
+                i--;
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        Log.i(TAG, "Started: Marking the space for the word to be guessed.");
+        if (guessThisWord.length() >= 1)
+        {
+            if (guessThisWord.toCharArray()[0] != ' ')
+            {
+                ltrs[0][0].setBackgroundResource(R.drawable.underscore1);
+            }
+            else
+            {
+                points++;
+            }
+            if (guessThisWord.length() >= 2)
+            {
+                if (guessThisWord.toCharArray()[1] != ' ')
+                {
+                    ltrs[0][1].setBackgroundResource(R.drawable.underscore2);
+                }
+                else
+                {
+                    points++;
+                }
+                if (guessThisWord.length() >= 3)
+                {
+                    if (guessThisWord.toCharArray()[2] != ' ')
+                    {
+                        ltrs[0][2].setBackgroundResource(R.drawable.underscore3);
+                    }
+                    else
+                    {
+                        points++;
+                    }
+                    if (guessThisWord.length() >= 4)
+                    {
+                        if (guessThisWord.toCharArray()[3] != ' ')
+                        {
+                            ltrs[0][3].setBackgroundResource(R.drawable.underscore4);
+                        }
+                        else
+                        {
+                            points++;
+                        }
+                        if (guessThisWord.length() >= 5)
+                        {
+                            if (guessThisWord.toCharArray()[4] != ' ')
+                            {
+                                ltrs[0][4].setBackgroundResource(R.drawable.underscore5);
+                            }
+                            else
+                            {
+                                points++;
+                            }
+                            if (guessThisWord.length() >= 6)
+                            {
+                                if (guessThisWord.toCharArray()[5] != ' ')
+                                {
+                                    ltrs[0][5].setBackgroundResource(R.drawable.underscore6);
+                                }
+                                else
+                                {
+                                    points++;
+                                }
+                                if (guessThisWord.length() >= 7)
+                                {
+                                    if (guessThisWord.toCharArray()[6] != ' ')
+                                    {
+                                        ltrs[0][6].setBackgroundResource(R.drawable.underscore7);
+                                    }
+                                    else
+                                    {
+                                        points++;
+                                    }
+                                    if (guessThisWord.length() >= 8)
+                                    {
+                                        if (guessThisWord.toCharArray()[7] != ' ')
+                                        {
+                                            ltrs[0][7].setBackgroundResource(R.drawable.underscore8);
+                                        }
+                                        else
+                                        {
+                                            points++;
+                                        }
+
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        Log.i(TAG, "Finished: Marking the space for the word to be guessed.");
+    }
+    //----------------------------------------//
+
+    public int lives = 9;
+
+    //----------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
+
+
+
+
+    public void AnyButtonIsPressed (View view)
+    {
+        Log.i(TAG, "Start: ButtonOnclick");
+        int theIndexOfTheCurrentButton;
+        final MediaPlayer mp = MediaPlayer.create(this, R.raw.btpresswav);
+        switch(view.getId()) //----deciding the button number-------\\
+        {
+            case R.id.BT_A:
+                theIndexOfTheCurrentButton = 0;
+                mp.start();
+                break;
+            case R.id.BT_A2:
+                theIndexOfTheCurrentButton = 1;
+                mp.start();
+                break;
+            case R.id.BT_B:
+                theIndexOfTheCurrentButton = 2;
+                mp.start();
+                break;
+            case R.id.BT_C:
+                theIndexOfTheCurrentButton = 3;
+                mp.start();
+                break;
+            case R.id.BT_D:
+                theIndexOfTheCurrentButton = 4;
+                mp.start();
+                break;
+            case R.id.BT_E:
+                theIndexOfTheCurrentButton = 5;
+                mp.start();
+                break;
+            case R.id.BT_E2:
+                theIndexOfTheCurrentButton = 6;
+                mp.start();
+                break;
+            case R.id.BT_F:
+                theIndexOfTheCurrentButton = 7;
+                mp.start();
+                break;
+            case R.id.BT_G:
+                theIndexOfTheCurrentButton = 8;
+                mp.start();
+                break;
+            case R.id.BT_H:
+                theIndexOfTheCurrentButton = 9;
+                mp.start();
+                break;
+            case R.id.BT_I:
+                theIndexOfTheCurrentButton = 10;
+                mp.start();
+                break;
+            case R.id.BT_I2:
+                theIndexOfTheCurrentButton = 11;
+                mp.start();
+                break;
+            case R.id.BT_J:
+                theIndexOfTheCurrentButton = 12;
+                mp.start();
+                break;
+            case R.id.BT_K:
+                theIndexOfTheCurrentButton = 13;
+                mp.start();
+                break;
+            case R.id.BT_L:
+                theIndexOfTheCurrentButton = 14;
+                mp.start();
+                break;
+            case R.id.BT_M:
+                theIndexOfTheCurrentButton = 15;
+                mp.start();
+                break;
+            case R.id.BT_N:
+                theIndexOfTheCurrentButton = 16;
+                mp.start();
+                break;
+            case R.id.BT_O:
+                theIndexOfTheCurrentButton = 17;
+                mp.start();
+                break;
+            case R.id.BT_O2:
+                theIndexOfTheCurrentButton = 18;
+                mp.start();
+                break;
+            case R.id.BT_O3:
+                theIndexOfTheCurrentButton = 19;
+                mp.start();
+                break;
+            case R.id.BT_O4:
+                theIndexOfTheCurrentButton = 20;
+                mp.start();
+                break;
+            case R.id.BT_P:
+                theIndexOfTheCurrentButton = 21;
+                mp.start();
+                break;
+            case R.id.BT_Q:
+                theIndexOfTheCurrentButton = 22;
+                mp.start();
+                break;
+            case R.id.BT_R:
+                theIndexOfTheCurrentButton = 23;
+                mp.start();
+                break;
+            case R.id.BT_S:
+                theIndexOfTheCurrentButton = 24;
+                mp.start();
+                break;
+            case R.id.BT_T:
+                theIndexOfTheCurrentButton = 25;
+                mp.start();
+                break;
+            case R.id.BT_U:
+                theIndexOfTheCurrentButton = 26;
+                mp.start();
+                break;
+            case R.id.BT_U2:
+                theIndexOfTheCurrentButton = 27;
+                mp.start();
+                break;
+            case R.id.BT_U3:
+                theIndexOfTheCurrentButton = 28;
+                mp.start();
+                break;
+            case R.id.BT_U4:
+                theIndexOfTheCurrentButton = 29;
+                mp.start();
+                break;
+            case R.id.BT_V:
+                theIndexOfTheCurrentButton = 30;
+                mp.start();
+                break;
+            case R.id.BT_W:
+                theIndexOfTheCurrentButton = 31;
+                mp.start();
+                break;
+            case R.id.BT_X:
+                theIndexOfTheCurrentButton = 32;
+                mp.start();
+                break;
+            case R.id.BT_Y:
+                theIndexOfTheCurrentButton = 33;
+                mp.start();
+                break;
+            case R.id.BT_Z:
+                theIndexOfTheCurrentButton = 34;
+                mp.start();
+                break;
+            default:
+                theIndexOfTheCurrentButton = 0;
+                mp.start();
+                break;
+        }//------------------------deciding the button number-------\\
+
+        //--Failed Attempts--
+        //
+        // Character.toString()
+        // String.valueOf()
+        // new Character('x').toString()
+        //
+
+        String currLtr = String.valueOf(abcb.toCharArray()[theIndexOfTheCurrentButton]); // get current letter
+
+        Log.i(TAG,"Started: Pressed '" + currLtr + "' button.");
+        /**
+            String textureID = abcs.toCharArray()[theIndexOfTheCurrentButton] + "c";
+            int resID = getResources().getIdentifier(textureID, "drawable", getPackageName());
+            buttons[theIndexOfTheCurrentButton].setBackgroundResource(resID);
+            buttons[theIndexOfTheCurrentButton].setClickable(false);
+        */
+        buttons[theIndexOfTheCurrentButton].setText(currLtr);
+
+        touchvibrator();
+        CheckTheUserInput(currLtr); // send data to the checking void  // <------------------------------ here
+        Log.i(TAG,"Finished: Pressed '" + currLtr + "' button.");
+
+        Log.i(TAG, "Finish: ButtonOnclick");
+
+    }
+    /*
+    //----------------------------------------------\\---A---//
+    public void LetterA (View view)
+    {
+        Log.i(TAG,"Start: Pressed 'A' button.");
+
+        la.setBackgroundResource(R.drawable.ac);
+        la.setClickable(false);
+
+        //String textureID = Character.toString(abcs.toCharArray()[0]) + "c";\\ <- AS doesn't like this one...
+        String textureID = abcs.toCharArray()[0] + "c";
+        int resID = getResources().getIdentifier(textureID, "drawable", getPackageName());
+        buttons[0].setBackgroundResource(resID);
+        touchvibrator();
+        CheckTheUserInput("A");
+        Log.i(TAG,"Finished: Pressed 'A' button.");
+
+    }
+    //----------------------------------------------\\---B---//
+    public void LetterB (View view)
+    {
+        Log.i(TAG,"Start: Pressed 'B' button.");
+
+        lb.setBackgroundResource(R.drawable.bc);
+        lb.setClickable(false);
+
+        String textureID = abcs.toCharArray()[1] + "c";
+        int resID = getResources().getIdentifier(textureID, "drawable", getPackageName());
+        buttons[1].setBackgroundResource(resID);
+        touchvibrator();
+        CheckTheUserInput("B");
+        Log.i(TAG,"Finished: Pressed 'B' button.");
+    }
+    //----------------------------------------------\\---C---//
+    public void LetterC (View view)
+    {
+        Log.i(TAG,"Start: Pressed 'C' button.");
+
+        lc.setBackgroundResource(R.drawable.cc);
+        lc.setClickable(false);
+
+        String textureID = abcs.toCharArray()[2] + "c";
+        int resID = getResources().getIdentifier(textureID, "drawable", getPackageName());
+        buttons[2].setBackgroundResource(resID);
+        touchvibrator();
+        CheckTheUserInput("C");
+        Log.i(TAG,"Finished: Pressed 'C' button.");
+    }
+    //----------------------------------------------\\---D---//
+    public void LetterD (View view)
+    {
+        Log.i(TAG,"Start: Pressed 'D' button.");
+
+        ld.setBackgroundResource(R.drawable.dc);
+        ld.setClickable(false);
+
+        String textureID = abcs.toCharArray()[3] + "c";
+        int resID = getResources().getIdentifier(textureID, "drawable", getPackageName());
+        buttons[3].setBackgroundResource(resID);
+        touchvibrator();
+        CheckTheUserInput("D");
+        Log.i(TAG,"Finished: Pressed 'D' button.");
+    }
+    //----------------------------------------------\\---E---//
+    public void LetterE (View view)
+    {
+        Log.i(TAG,"Start: Pressed 'E' button.");
+
+        le.setBackgroundResource(R.drawable.ec);
+        le.setClickable(false);
+
+        String textureID = abcs.toCharArray()[4] + "c";
+        int resID = getResources().getIdentifier(textureID, "drawable", getPackageName());
+        buttons[4].setBackgroundResource(resID);
+        touchvibrator();
+        CheckTheUserInput("E");
+        Log.i(TAG,"Finished: Pressed 'E' button.");
+    }
+    //----------------------------------------------\\---F---//
+    public void LetterF (View view)
+    {
+        Log.i(TAG,"Start: Pressed 'F' button.");
+
+        lf.setBackgroundResource(R.drawable.fc);
+        lf.setClickable(false);
+
+        String textureID = abcs.toCharArray()[5] + "c";
+        int resID = getResources().getIdentifier(textureID, "drawable", getPackageName());
+        buttons[5].setBackgroundResource(resID);
+        touchvibrator();
+        CheckTheUserInput("F");
+        Log.i(TAG,"Finished: Pressed 'F' button.");
+    }
+    //----------------------------------------------\\---G---//
+    public void LetterG (View view)
+    {
+        Log.i(TAG,"Start: Pressed 'G' button.");
+
+        lg.setBackgroundResource(R.drawable.gc);
+        lg.setClickable(false);
+
+        String textureID = abcs.toCharArray()[6] + "c";
+        int resID = getResources().getIdentifier(textureID, "drawable", getPackageName());
+        buttons[6].setBackgroundResource(resID);
+        touchvibrator();
+        CheckTheUserInput("G");
+        Log.i(TAG,"Finished: Pressed 'G' button.");
+    }
+    //----------------------------------------------\\---H---//
+    public void LetterH (View view)
+    {
+        Log.i(TAG,"Start: Pressed 'H' button.");
+
+        lh.setBackgroundResource(R.drawable.hc);
+        lh.setClickable(false);
+
+        String textureID = abcs.toCharArray()[7] + "c";
+        int resID = getResources().getIdentifier(textureID, "drawable", getPackageName());
+        buttons[7].setBackgroundResource(resID);
+        touchvibrator();
+        CheckTheUserInput("H");
+        Log.i(TAG,"Finished: Pressed 'H' button.");
+    }
+    //----------------------------------------------\\---I---//
+    public void LetterI (View view)
+    {
+        Log.i(TAG,"Start: Pressed 'I' button.");
+
+        li.setBackgroundResource(R.drawable.ic);
+        li.setClickable(false);
+
+        String textureID = abcs.toCharArray()[8] + "c";
+        int resID = getResources().getIdentifier(textureID, "drawable", getPackageName());
+        buttons[8].setBackgroundResource(resID);
+        touchvibrator();
+        CheckTheUserInput("I");
+        Log.i(TAG,"Finished: Pressed 'I' button.");
+    }
+    //----------------------------------------------\\---J---//
+    public void LetterJ (View view)
+    {
+        Log.i(TAG,"Start: Pressed 'J' button.");
+
+        lj.setBackgroundResource(R.drawable.jc);
+        lj.setClickable(false);
+
+        String textureID = abcs.toCharArray()[9] + "c";
+        int resID = getResources().getIdentifier(textureID, "drawable", getPackageName());
+        buttons[9].setBackgroundResource(resID);
+        touchvibrator();
+        CheckTheUserInput("J");
+        Log.i(TAG,"Finished: Pressed 'J' button.");
+    }
+    //----------------------------------------------\\---K---//
+    public void LetterK (View view)
+    {
+        Log.i(TAG,"Start: Pressed 'K' button.");
+
+        lj.setBackgroundResource(R.drawable.jc);
+        lj.setClickable(false);
+
+        String textureID = abcs.toCharArray()[10] + "c";
+        int resID = getResources().getIdentifier(textureID, "drawable", getPackageName());
+        buttons[10].setBackgroundResource(resID);
+        touchvibrator();
+        CheckTheUserInput("K");
+        Log.i(TAG,"Finished: Pressed 'K' button.");
+    }
+    //----------------------------------------------\\---L---//
+    public void LetterL (View view)
+    {
+        Log.i(TAG,"Start: Pressed 'L' button.");
+
+        ll.setBackgroundResource(R.drawable.lc);
+        ll.setClickable(false);
+
+        String textureID = abcs.toCharArray()[11] + "c";
+        int resID = getResources().getIdentifier(textureID, "drawable", getPackageName());
+        buttons[11].setBackgroundResource(resID);
+        touchvibrator();
+        CheckTheUserInput("L");
+        Log.i(TAG,"Finished: Pressed 'L' button.");
+    }
+    //----------------------------------------------\\---M---//
+    public void LetterM (View view)
+    {
+        Log.i(TAG,"Start: Pressed 'M' button.");
+
+        lm.setBackgroundResource(R.drawable.mc);
+        lm.setClickable(false);
+
+        String textureID = abcs.toCharArray()[12] + "c";
+        int resID = getResources().getIdentifier(textureID, "drawable", getPackageName());
+        buttons[12].setBackgroundResource(resID);
+        touchvibrator();
+        CheckTheUserInput("M");
+        Log.i(TAG,"Finished: Pressed 'M' button.");
+    }
+    //----------------------------------------------\\---N---//
+    public void LetterN (View view)
+    {
+        Log.i(TAG,"Start: Pressed 'N' button.");
+
+        ln.setBackgroundResource(R.drawable.nc);
+        ln.setClickable(false);
+
+        String textureID = abcs.toCharArray()[13] + "c";
+        int resID = getResources().getIdentifier(textureID, "drawable", getPackageName());
+        buttons[13].setBackgroundResource(resID);
+        touchvibrator();
+        CheckTheUserInput("N");
+        Log.i(TAG,"Finished: Pressed 'N' button.");
+    }
+    //----------------------------------------------\\---O---//
+    public void LetterO (View view)
+    {
+        Log.i(TAG,"Start: Pressed 'O' button.");
+
+        lo.setBackgroundResource(R.drawable.oc);
+        lo.setClickable(false);
+
+        String textureID = abcs.toCharArray()[14] + "c";
+        int resID = getResources().getIdentifier(textureID, "drawable", getPackageName());
+        buttons[14].setBackgroundResource(resID);
+        touchvibrator();
+        CheckTheUserInput("O");
+        Log.i(TAG,"Finished: Pressed 'O' button.");
+    }
+    //----------------------------------------------\\---P---//
+    public void LetterP (View view)
+    {
+        Log.i(TAG,"Start: Pressed 'P' button.");
+
+        lp.setBackgroundResource(R.drawable.pc);
+        lp.setClickable(false);
+
+        String textureID = abcs.toCharArray()[15] + "c";
+        int resID = getResources().getIdentifier(textureID, "drawable", getPackageName());
+        buttons[15].setBackgroundResource(resID);
+        touchvibrator();
+        CheckTheUserInput("P");
+        Log.i(TAG,"Finished: Pressed 'P' button.");
+    }
+    //----------------------------------------------\\---Q---//
+    public void LetterQ (View view)
+    {
+        Log.i(TAG,"Start: Pressed 'Q' button.");
+
+        lq.setBackgroundResource(R.drawable.qc);
+        lq.setClickable(false);
+
+        String textureID = abcs.toCharArray()[16] + "c";
+        int resID = getResources().getIdentifier(textureID, "drawable", getPackageName());
+        buttons[16].setBackgroundResource(resID);
+        touchvibrator();
+        CheckTheUserInput("Q");
+        Log.i(TAG,"Finished: Pressed 'Q' button.");
+    }
+    //----------------------------------------------\\---R---//
+    public void LetterR (View view)
+    {
+        Log.i(TAG,"Start: Pressed 'R' button.");
+
+        lr.setBackgroundResource(R.drawable.rc);
+        lr.setClickable(false);
+
+        String textureID = abcs.toCharArray()[17] + "c";
+        int resID = getResources().getIdentifier(textureID, "drawable", getPackageName());
+        buttons[17].setBackgroundResource(resID);
+        touchvibrator();
+        CheckTheUserInput("R");
+        Log.i(TAG,"Finished: Pressed 'R' button.");
+    }
+    //----------------------------------------------\\---S---//
+    public void LetterS (View view)
+    {
+        Log.i(TAG,"Start: Pressed 'S' button.");
+
+        ls.setBackgroundResource(R.drawable.sc);
+        ls.setClickable(false);
+
+        String textureID = abcs.toCharArray()[18] + "c";
+        int resID = getResources().getIdentifier(textureID, "drawable", getPackageName());
+        buttons[18].setBackgroundResource(resID);
+        touchvibrator();
+        CheckTheUserInput("S");
+        Log.i(TAG,"Finished: Pressed 'S' button.");
+    }
+    //----------------------------------------------\\---T---//
+    public void LetterT (View view)
+    {
+        Log.i(TAG,"Start: Pressed 'T' button.");
+
+        lt.setBackgroundResource(R.drawable.tc);
+        lt.setClickable(false);
+
+        String textureID = abcs.toCharArray()[19] + "c";
+        int resID = getResources().getIdentifier(textureID, "drawable", getPackageName());
+        buttons[19].setBackgroundResource(resID);
+        touchvibrator();
+        CheckTheUserInput("T");
+        Log.i(TAG,"Finished: Pressed 'T' button.");
+    }
+    //----------------------------------------------\\---U---//
+    public void LetterU (View view)
+    {
+        Log.i(TAG,"Start: Pressed 'U' button.");
+
+        lu.setBackgroundResource(R.drawable.uc);
+        lu.setClickable(false);
+
+        String textureID = abcs.toCharArray()[20] + "c";
+        int resID = getResources().getIdentifier(textureID, "drawable", getPackageName());
+        buttons[20].setBackgroundResource(resID);
+        touchvibrator();
+        CheckTheUserInput("U");
+        Log.i(TAG,"Finished: Pressed 'U' button.");
+    }
+    //----------------------------------------------\\---V---//
+    public void LetterV (View view)
+    {
+        Log.i(TAG,"Start: Pressed 'V' button.");
+
+        lv.setBackgroundResource(R.drawable.vc);
+        lv.setClickable(false);
+
+        String textureID = abcs.toCharArray()[21] + "c";
+        int resID = getResources().getIdentifier(textureID, "drawable", getPackageName());
+        buttons[21].setBackgroundResource(resID);
+        touchvibrator();
+        CheckTheUserInput("V");
+        Log.i(TAG,"Finished: Pressed 'V' button.");
+    }
+    //----------------------------------------------\\---W---//
+    public void LetterW (View view)
+    {
+        Log.i(TAG,"Start: Pressed 'W' button.");
+
+        lw.setBackgroundResource(R.drawable.wc);
+        lw.setClickable(false);
+
+        String textureID = abcs.toCharArray()[22] + "c";
+        int resID = getResources().getIdentifier(textureID, "drawable", getPackageName());
+        buttons[22].setBackgroundResource(resID);
+        touchvibrator();
+        CheckTheUserInput("W");
+        Log.i(TAG,"Finished: Pressed 'W' button.");
+    }
+    //----------------------------------------------\\---X---//
+    public void LetterX (View view)
+    {
+        Log.i(TAG,"Start: Pressed 'X' button.");
+
+        lx.setBackgroundResource(R.drawable.xc);
+        lx.setClickable(false);
+
+        String textureID = abcs.toCharArray()[23] + "c";
+        int resID = getResources().getIdentifier(textureID, "drawable", getPackageName());
+        buttons[23].setBackgroundResource(resID);
+        touchvibrator();
+        CheckTheUserInput("X");
+        Log.i(TAG,"Finished: Pressed 'X' button.");
+    }
+    //----------------------------------------------\\---Y---//
+    public void LetterY (View view)
+    {
+        Log.i(TAG,"Start: Pressed 'Y' button.");
+
+        ly.setBackgroundResource(R.drawable.yc);
+        ly.setClickable(false);
+
+        String textureID = abcs.toCharArray()[24] + "c";
+        int resID = getResources().getIdentifier(textureID, "drawable", getPackageName());
+        buttons[24].setBackgroundResource(resID);
+        touchvibrator();
+        CheckTheUserInput("Y");
+        Log.i(TAG,"Finished: Pressed 'Y' button.");
+    }
+    //----------------------------------------------\\---Z---//
+    public void LetterZ (View view)
+    {
+        Log.i(TAG,"Start: Pressed 'Z' button.");
+
+        lz.setBackgroundResource(R.drawable.zc);
+        lz.setClickable(false);
+
+        String textureID = abcs.toCharArray()[25] + "c";
+        int resID = getResources().getIdentifier(textureID, "drawable", getPackageName());
+        buttons[25].setBackgroundResource(resID);
+        touchvibrator();
+        CheckTheUserInput("Z");
+        Log.i(TAG,"Finished: Pressed 'Z' button.");
+    }
+    */
+    //----------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
+    public void CheckTheUserInput (String userInput)
+    {
+
+        //-----initiate the playsound-----\\
+        /*
+        Log.i(TAG, "Start: Playsound - Declaration");
+
+        MediaPlayer mediaplayer = MediaPlayer.create(this, R.raw.btpress); // <- cause of error TODO: WORK
+
+        Log.i(TAG, "Finished: Playsound - Declaration");
+
+        //----------------------------------\\
+
+        //-----use the playsound-----\\
+
+        Log.i(TAG, "Start: Playsound - Buttonpress");
+
+        mediaplayer.start(); //TODO: WORK
+
+        Log.i(TAG, "Finished: Playsound - Buttonpress");
+        */
+        //----------------------------------\\
+
+        Log.i(TAG, "Starting: checking the button press");
+        if (lives != 0 && points != guessThisWord.length())
+        {
+            if (guessThisWord.contains(userInput))
+            {
+                for (int i = 0; i < guessThisWord.length(); i++)
+                {
+                    if (guessThisWord.toCharArray()[i] == userInput.toCharArray()[0])
+                    {
+                        points++;
+
+                            int resID = getResources().getIdentifier(userInput.toLowerCase(), "drawable",getPackageName());
+                            ltrs[0][i].setImageResource(resID);
+
+                        //ltrs[0][i].setText(userInput);
+                    }
+                }
+
+                if (points == guessThisWord.length()) // VICTORY \\---------------------------------
+                {
+                    VictoryTxt();
+
+                } // VICTORY \\---------------------------------------------------------------------
+                Log.i(TAG, "Finished: right userInput reaction");
+            }
+            else
+            {
+                Log.i(TAG, "Starting: wrong userInput reaction");
+                int tmp = 8 - lives;
+                String temp = "hangman" + tmp;
+                int resID = getResources().getIdentifier(temp, "drawable",getPackageName());
+                lives--;
+                hangman.setImageResource(resID);
+
+                if (lives == 0) // DEFEAT \\--------------------------------------------------------
+                {
+
+                    DefeatTxt();
+
+                }  // DEFEAT \\---------------------------------------------------------------------
+
+                Log.i(TAG, "Finished: wrong userInput reaction");
+            }
+        }
+        Log.i(TAG, "Finished: checking the button press");
+
+    }
+    public void VictoryTxt ()
+    {
+
+        ltrs[2][0].setImageResource(R.drawable.y);
+        ltrs[2][1].setImageResource(R.drawable.o);
+        ltrs[2][2].setImageResource(R.drawable.u);
+
+        ltrs[2][5].setImageResource(R.drawable.w);
+        ltrs[2][6].setImageResource(R.drawable.i);
+        ltrs[2][7].setImageResource(R.drawable.n);
+
+        LockAllTheButtons();
+    }
+
+    public void DefeatTxt ()
+    {
+
+        ltrs[2][0].setImageResource(R.drawable.y);
+        ltrs[2][1].setImageResource(R.drawable.o);
+        ltrs[2][2].setImageResource(R.drawable.u);
+
+        ltrs[2][4].setImageResource(R.drawable.l);
+        ltrs[2][5].setImageResource(R.drawable.o);
+        ltrs[2][6].setImageResource(R.drawable.s);
+        ltrs[2][7].setImageResource(R.drawable.e);
+
+        LockAllTheButtons();
+
+        Toast.makeText(this, "You were suppose to guess this word : " + guessThisWord, Toast.LENGTH_LONG).show();
+    }
+    //----------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
+
+    public class ResetAll implements Runnable
+    {
+        @Override
+        public void run ()
+        {
+            //---------------------------//
+            letMeGo = false;
+            for (int i = 0; i < 3 ; i++)
+                for (int q = 0 ; q < 8 ; q++)
+                {
+
+                    String STRemptyplaceholder = "emptyplaceholder";
+                    int resID = getResources().getIdentifier(STRemptyplaceholder, "drawable", getPackageName());
+                    ltrs[i][q].setBackgroundResource(resID); // these are imageviews, if requested I will be back to finish this
+
+                }
+            Log.i(TAG,"Finished: Reset LetterViews pair images - Background Resource.");
+            letMeGo = true;
+            //---------------------------//
+            Log.i(TAG, "Start: Reset HangMan image.");
+            hangman.setImageResource(R.drawable.emptyplaceholder);
+            Log.i(TAG,"Finished: Reset HangMan image.");
+            //---------------------------//
+
+
+            for (int i = 0; i < 26 ; i++)
+            {
+                try
+                {
+                    Log.i(TAG, "buttonID " + i);
+
+            /**
+                int resID = getResources().getIdentifier(Character.toString(abcs.toCharArray()[i]), "drawable", getPackageName()); // this took longer than it was soppose to...
+                buttons[i].setBackgroundResource(resID); // plz wrk
+            */
+            buttons[i].setText(abcs.toCharArray()[i]);
+
+                    //buttons[i].setText(abcb.toCharArray()[i]);
+                }
+                catch (Exception e)
+                {
+                    i--;
+                }
+            }
+
+            Log.i(TAG,"Finished: Reset buttons pair images.");
+            //---------------------------//
+            //---------------------------//
+            Log.i(TAG,"Start: Change buttons to clickable.");
+
+            for (int i = 0 ; i < 26 ; i++)
+                buttons[i].setClickable(true);
+            Log.i(TAG,"Finished: Change buttons to clickable.");
+            //---------------------------//
+        }
+    }
+
+
+}
+
+

@@ -1,0 +1,24 @@
+com/szabhun/sgttteam/hangman/GlobalVariables.java
+ com.szabhun.sgttteam.hangman.GlobalVariables
+com/szabhun/sgttteam/hangman/AboutActivity.java
+ com.szabhun.sgttteam.hangman.AboutActivity
+com/szabhun/sgttteam/hangman/SideClass.java
+ com.szabhun.sgttteam.hangman.SideClass
+com/szabhun/sgttteam/hangman/ScoresActivity.java
+ com.szabhun.sgttteam.hangman.ScoresActivity
+com/szabhun/sgttteam/hangman/OptionsActivity.java
+ com.szabhun.sgttteam.hangman.OptionsActivity
+com/szabhun/sgttteam/hangman/OpenerActivity.java
+ com.szabhun.sgttteam.hangman.OpenerActivity
+ com.szabhun.sgttteam.hangman.OpenerActivity$1
+com/szabhun/sgttteam/hangman/BuildConfig.java
+ com.szabhun.sgttteam.hangman.BuildConfig
+com/szabhun/sgttteam/hangman/GameActivity.java
+ com.szabhun.sgttteam.hangman.GameActivity
+ com.szabhun.sgttteam.hangman.GameActivity$ClearScreen
+ com.szabhun.sgttteam.hangman.GameActivity$GetGlobal
+ com.szabhun.sgttteam.hangman.GameActivity$NewWord
+ com.szabhun.sgttteam.hangman.GameActivity$PairUI
+ com.szabhun.sgttteam.hangman.GameActivity$ResetAll
+com/szabhun/sgttteam/hangman/MenuActivity.java
+ com.szabhun.sgttteam.hangman.MenuActivity
