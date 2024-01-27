@@ -11,7 +11,6 @@ Egy a legtöbb android eszközön futtatható, offline is elérhető akasztófa 
 
 
 ## Követelmény mLista
-ID|VERZIÓ|NÉV|KIFEJTÉS
 --|------|---|--------
 K1|0.7|Több nyelv támogatása|A beállítások ablakban váltható hogy magyar vagy angol nyelven szeretnénk az alkalmazás felületét látni
 K2|0.7|Pontszám követése|A játék alatt kapott (és vesztett) pontszámok memóriába való tárolása, hogy elérhető legyen a teljes alkalmazásban
