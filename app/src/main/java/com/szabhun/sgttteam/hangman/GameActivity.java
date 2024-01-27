@@ -564,6 +564,144 @@ private void touchvibrator () {
 
     }
     //----//
+    
+    public void AnyButtonIsPressed (View view)
+    {
+
+
+        Log.i(TAG, "Start: ButtonOnclick");
+        int theIndexOfTheCurrentButton;
+
+
+
+        switch(view.getId()) //--------------------deciding-the-button-number--------------------\\
+        {                   //----each-button-gives-a-value-that-is-an-index-of-the-ABC-string----\\
+            case R.id.BT_A:
+                theIndexOfTheCurrentButton = 0;
+                checkpreferencesbuttonsound();
+                break;
+            case R.id.BT_B:
+                theIndexOfTheCurrentButton = 1;
+                checkpreferencesbuttonsound();
+                break;
+            case R.id.BT_C:
+                theIndexOfTheCurrentButton = 2;
+                checkpreferencesbuttonsound();
+                break;
+            case R.id.BT_D:
+                theIndexOfTheCurrentButton = 3;
+                checkpreferencesbuttonsound();
+                break;
+            case R.id.BT_E:
+                theIndexOfTheCurrentButton = 4;
+                checkpreferencesbuttonsound();
+                break;
+            case R.id.BT_F:
+                theIndexOfTheCurrentButton = 5;
+                checkpreferencesbuttonsound();
+                break;
+            case R.id.BT_G:
+                theIndexOfTheCurrentButton = 6;
+                checkpreferencesbuttonsound();
+                break;
+            case R.id.BT_H:
+                theIndexOfTheCurrentButton = 7;
+                checkpreferencesbuttonsound();
+                break;
+            case R.id.BT_I:
+                theIndexOfTheCurrentButton = 8;
+                checkpreferencesbuttonsound();
+                break;
+            case R.id.BT_J:
+                theIndexOfTheCurrentButton = 9;
+                checkpreferencesbuttonsound();
+                break;
+            case R.id.BT_K:
+                theIndexOfTheCurrentButton = 10;
+                checkpreferencesbuttonsound();
+                break;
+            case R.id.BT_L:
+                theIndexOfTheCurrentButton = 11;
+                checkpreferencesbuttonsound();
+                break;
+            case R.id.BT_M:
+                theIndexOfTheCurrentButton = 12;
+                checkpreferencesbuttonsound();
+                break;
+            case R.id.BT_N:
+                theIndexOfTheCurrentButton = 13;
+                checkpreferencesbuttonsound();
+                break;
+            case R.id.BT_O:
+                theIndexOfTheCurrentButton = 14;
+                checkpreferencesbuttonsound();
+                break;
+            case R.id.BT_P:
+                theIndexOfTheCurrentButton = 15;
+                checkpreferencesbuttonsound();
+                break;
+            case R.id.BT_Q:
+                theIndexOfTheCurrentButton = 16;
+                checkpreferencesbuttonsound();
+                break;
+            case R.id.BT_R:
+                theIndexOfTheCurrentButton = 17;
+                checkpreferencesbuttonsound();
+                break;
+            case R.id.BT_S:
+                theIndexOfTheCurrentButton = 18;
+                checkpreferencesbuttonsound();
+                break;
+            case R.id.BT_T:
+                theIndexOfTheCurrentButton = 19;
+                checkpreferencesbuttonsound();
+                break;
+            case R.id.BT_U:
+                theIndexOfTheCurrentButton = 20;
+                checkpreferencesbuttonsound();
+                break;
+            case R.id.BT_V:
+                theIndexOfTheCurrentButton = 21;
+                checkpreferencesbuttonsound();
+                break;
+            case R.id.BT_W:
+                theIndexOfTheCurrentButton = 22;
+                checkpreferencesbuttonsound();
+                break;
+            case R.id.BT_X:
+                theIndexOfTheCurrentButton = 23;
+                checkpreferencesbuttonsound();
+                break;
+            case R.id.BT_Y:
+                theIndexOfTheCurrentButton = 24;
+                checkpreferencesbuttonsound();
+                break;
+            case R.id.BT_Z:
+                theIndexOfTheCurrentButton = 25;
+                checkpreferencesbuttonsound();
+                break;
+            default:
+                theIndexOfTheCurrentButton = 0;
+                checkpreferencesbuttonsound();
+                break;
+        }//------------------------deciding the button number-------\\
+
+
+        String currLtr = String.valueOf(abcb.toCharArray()[theIndexOfTheCurrentButton]); // get current letter
+
+        Log.i(TAG,"Started: Pressed '" + currLtr + "' button.");
+        String textureID = abcs.toCharArray()[theIndexOfTheCurrentButton] + "c";
+        int resID = getResources().getIdentifier(textureID, "drawable", getPackageName());
+        buttons[theIndexOfTheCurrentButton].setBackgroundResource(resID);
+        buttons[theIndexOfTheCurrentButton].setClickable(false);
+        touchvibrator();
+        CheckTheUserInput(currLtr); // send data to the checking void  // <------------------------------ here
+        Log.i(TAG,"Finished: Pressed '" + currLtr + "' button.");
+        
+        Log.i(TAG, "Finish: ButtonOnclick");
+
+    }
+    //----//
 
     public class GetGlobal implements Runnable {
 
