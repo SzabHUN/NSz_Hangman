@@ -266,6 +266,20 @@ public class GameActivity extends AppCompatActivity {
 
     }
 
+    public void ClearScreen (View view)
+    {
+        //---------------------------//
+        Log.i(TAG,"Start: Full reset.");
+        Reset();
+        Log.i(TAG,"Finished: Full reset.");
+        //---------------------------//
+        MarkingTheSpaceForTheWord();
+        //---------------------------//
+        points = 0;
+        lives = 7;
+        //new Thread(ClearRun).start();
+    }
+
     
 
     //----------------------------------------//
