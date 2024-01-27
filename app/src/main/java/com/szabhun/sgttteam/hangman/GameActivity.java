@@ -76,7 +76,30 @@ public class GameActivity extends AppCompatActivity {
         return super.createDisplayContext(display);
     }
 
+/*
+     * cheat sheet
+     * new ResetAll().run(); → same thread
+     * new Thread(ResetRun).start(); → new
+     */
 
+
+    //create reset class
+    ResetAll ResetRun = new ResetAll();
+
+    //create Global Variables fetching class
+    GetGlobal GlobalRun = new GetGlobal();
+
+    //create class to pair front-end to back-end
+    PairUI PairRun = new PairUI();
+
+    //
+    NewWord NewRun = new NewWord();
+
+    //
+    ClearScreen ClearRun = new ClearScreen();
+
+
+    public int points = 0;
     
 
     @Override
