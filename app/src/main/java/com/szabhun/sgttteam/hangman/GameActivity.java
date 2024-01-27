@@ -529,6 +529,42 @@ private void touchvibrator () {
     }
     //----------------------------------------//
 
+    private void checkpreferencesbackgroundsound()
+    {
+        final MediaPlayer mpbackground = MediaPlayer.create(this, R.raw.gamebackgroundmusic);
+        GlobalVariables globalvariables=(GlobalVariables)getApplication();
+        String muteunmute = globalvariables.getOpt_muteunmute();
+        int muteunmutenum = Integer.parseInt(muteunmute);
+        if (muteunmutenum == 0)
+        {
+            mpbackground.start();
+        }
+        else if (muteunmutenum == 1)
+        {
+
+        }
+
+    }
+
+
+    private void checkpreferencesbuttonsound()
+    {
+        final MediaPlayer mpbutton = MediaPlayer.create(this, R.raw.btpresswav);
+        GlobalVariables globalvariables=(GlobalVariables)getApplication();
+        String muteunmute = globalvariables.getOpt_muteunmute();
+        int muteunmutenum = Integer.parseInt(muteunmute);
+        if (muteunmutenum == 0)
+        {
+            mpbutton.start();
+        }
+        else if (muteunmutenum == 1)
+        {
+
+        }
+
+    }
+    //----//
+
     public class GetGlobal implements Runnable {
 
         @Override
