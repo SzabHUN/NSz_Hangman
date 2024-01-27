@@ -924,8 +924,58 @@ private void touchvibrator () {
         Toast.makeText(this, "You were suppose to guess this word : " + guessThisWord, Toast.LENGTH_LONG).show();
     }
     //----//
+    public class ResetAll implements Runnable
+    {
+        @Override
+        public void run ()
+        {
+            Log.i(TAG,"Start: Full reset.");
+            //---------------------------//
+            letMeGo = false;
+            for (int i = 0; i < 3 ; i++)
+                for (int q = 0 ; q < 8 ; q++)
+                {
+
+                    String STRemptyplaceholder = "emptyplaceholder";
+                    int resID = getResources().getIdentifier(STRemptyplaceholder, "drawable", getPackageName());
+                    ltrs[i][q].setBackgroundResource(resID); // these are imageviews, if requested I will be back to finish this
+
+                }
+            Log.i(TAG,"Finished: Reset LetterViews pair images - Background Resource.");
+                letMeGo = true;
+            //---------------------------//
+            Log.i(TAG, "Start: Reset HangMan image.");
+            hangman.setImageResource(R.drawable.emptyplaceholder);
+            Log.i(TAG,"Finished: Reset HangMan image.");
+            //---------------------------//
+                for (int i = 0; i < 26 ; i++)
+                    try
+                    {
+                        Log.i(TAG, "buttonID " + i);
+                        int resID = getResources().getIdentifier(Character.toString(abcs.toCharArray()[i]), "drawable", getPackageName()); // this took longer than it was soppose to...
+                        buttons[i].setBackgroundResource(resID);
+                    }
+                    catch (Exception e)
+                    {
+                        Log.i(TAG,"--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+                        i--;
+                    }
+            Log.i(TAG,"Finished: Reset buttons pair images.");
+            //---------------------------//
+            //---------------------------//
+            Log.i(TAG,"Start: Change buttons to clickable.");
+            for (int i = 0 ; i < 26 ; i++)
+                buttons[i].setClickable(true);
+            Log.i(TAG,"Finished: Change buttons to clickable.");
+            //---------------------------//
+            Log.i(TAG,"Finished: Full reset.");
+        }
+    }
     //----//
     //----//
+
+
+
 
     public class GetGlobal implements Runnable {
 
