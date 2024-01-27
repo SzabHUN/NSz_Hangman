@@ -108,6 +108,44 @@ public class GameActivity extends AppCompatActivity {
         setContentView(R.layout.activity_game);
         Log.i(TAG,"Start: onCreate.");
 
+        checkpreferencesbackgroundsound();
+
+        //getGlobalz(); // getting the global variables
+
+        scoreview=findViewById(R.id.ScoreView);
+        scoreview.setText(Long.toString(score));
+        MLayout = findViewById(R.id.Game_MLayout);
+        hangman = findViewById(R.id.Hangman);
+        MLayout.setBackgroundResource(R.drawable.crumpedpaperbackgroundflipped);
+        //---------------------------//
+
+        new Thread(GlobalRun).start();
+        //---------------------------//
+        Log.i(TAG,"Start: Pair UI objects.");
+        //PairUIElements();
+        new PairUI().run();
+        Log.i(TAG,"Finished: Pair UI objects.");
+        //---------------------------//
+        //---------------------------//
+        //new Thread(ResetRun).start();
+        //---------------------------//
+        //SelectAWord();
+        //---------------------------//
+        //MarkingTheSpaceForTheWord();
+        //---------------------------//
+        new ResetAll().run();
+        new NewWord().run();
+        //---------------------------//
+        if (diff == "SzabHUN")
+        {
+            Toast.makeText(this, "Difficulty is Incorrect, '" +diff+"' is not in the database, and I will draw this line out so its rather visible in debugging",15).show();
+            Log.i(TAG, "Difficulty is Incorrect, '"+diff+"' is not in the database, and I will draw this line out so its rather visible in debugging, resetting the value to 'normal'.");
+            diff="normal";
+        }
+        //---------------------------//
+        //---------------------------//
+
+
 
 
     }
