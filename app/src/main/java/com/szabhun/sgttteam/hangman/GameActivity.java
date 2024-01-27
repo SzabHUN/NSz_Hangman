@@ -855,6 +855,74 @@ private void touchvibrator () {
         SaveScore();
         Log.i(TAG, "End:Saving the score.");
     }
+
+    public void DefeatTxt ()
+    {
+
+        ltrs[2][0].setImageResource(R.drawable.y);
+        ltrs[2][1].setImageResource(R.drawable.o);
+        ltrs[2][2].setImageResource(R.drawable.u);
+
+        ltrs[2][4].setImageResource(R.drawable.l);
+        ltrs[2][5].setImageResource(R.drawable.o);
+        ltrs[2][6].setImageResource(R.drawable.s);
+        ltrs[2][7].setImageResource(R.drawable.e);
+
+        LockAllTheButtons();
+        Log.i(TAG, "Start:fail-switch.");
+        switch (diff)
+        {
+            case "easy":
+                Log.i(TAG, "Res:easy");
+                score = score - 35;
+                break;
+            case "normal":
+                Log.i(TAG, "Res:normal");
+                score = score - 55;
+                break;
+            case "hard":
+                Log.i(TAG, "Res:hard");
+                score = score - 75;
+                break;
+            default:
+                Log.i(TAG, "Res:wtf-fail");
+                //Toast.makeText(this, "WTF - fail", Toast.LENGTH_LONG).show();
+                break;
+        }
+        Log.i(TAG, "End:fail-switch.");
+
+        Log.i(TAG,"Start:checking loosing streak.");
+
+        streak++;
+        if (streak == 7) // changed from 3 to 7 - #balancing
+        {
+            score=0;
+
+            GlobalVariables globalvariables=(GlobalVariables)getApplication();
+
+            globalvariables.setScore(Long.toString(score));
+
+            scoreview.setText(Long.toString(score));
+        }
+        else
+        {
+            //score = score - score/6;
+
+            GlobalVariables globalvariables=(GlobalVariables)getApplication();
+
+            globalvariables.setScore(Long.toString(score));
+
+            scoreview.setText(Long.toString(score));
+        }
+
+        Log.i(TAG,"End:checking loosing streak.");
+
+        Log.i(TAG, "Start:Saving the score.");
+        SaveScore();
+        Log.i(TAG, "End:Saving the score.");
+
+        Toast.makeText(this, "You were suppose to guess this word : " + guessThisWord, Toast.LENGTH_LONG).show();
+    }
     //----//
     //----//
     //----//
