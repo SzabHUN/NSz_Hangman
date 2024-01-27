@@ -34,9 +34,13 @@ import static android.content.ContentValues.TAG;
 public class GameActivity extends AppCompatActivity {
 
 
-    
-    ImageView hangman;      
-    LinearLayout MLayout;   
+     //there are 26 letters in the english alphabet
+    //there will be 7 parts to the Hanged Man
+
+    //Button la,lb,lc,ld,le,lf,lg,lh,li,lj,lk,ll,lm,ln,lo,lp,lq,lr,ls,lt,lu,lv,lw,lx,ly,lz;
+    //ImageView l00,l01,l02,l03,l04,l05,l06,l07,l10,l11,l12,l13,l14,l15,l16,l17,l20,l21,l22,l23,l24,l25,l26,l27,hangman;
+    ImageView hangman;      // The Image of the hangman in the centre
+    LinearLayout MLayout;   // Master Layout - optimization so the program doesn't have a pre-determent background
     TextView scoreview;
 
     public Button[] buttons = new Button[26];           // variable to the 26 individual Buttons so its more dynamic
@@ -172,6 +176,79 @@ public class GameActivity extends AppCompatActivity {
         }
         Log.i(TAG,"Loaded: Fullscreen.");
     }
+    //public GlobalVariables globalvariables=(GlobalVariables)getApplication();
+    /*
+    public void getGlobalz() {
+        GlobalVariables globalvariables=(GlobalVariables)getApplication();
+        String tmp1 = globalvariables.getOpt_difficulty();
+        //diff = tmp;
+        switch (tmp1)
+        {
+            case "1":
+                diff = "easy";
+                break;
+
+            case "2":
+                diff = "normal";
+                break;
+
+            case "3":
+                diff = "hard";
+                break;
+
+            default:
+                Log.i(TAG,"!!!no difficulty was selected - setting it to normal!!!");
+                diff = "normal";
+                break;
+        }
+        GetGlobal getGlobal = new GetGlobal(this);
+        diff = getGlobal.Diff().toString();
+        score = getGlobal.Score();
+
+        try {
+            score = Integer.parseInt(globalvariables.getScore());
+        }
+        catch (NumberFormatException e)
+        {
+            score = 0;
+        }
+
+        try {
+            scoreTable = globalvariables.getScoreTable();
+        }
+        catch (Exception e)
+        {
+            scoreTable = "0;0;0;0;0;0;0;0;0";
+        }
+    }
+    */
+    /*
+    public void PairUIElements ()
+    {
+        //---------------------------//--The-ImageViews--\\
+        Log.i(TAG,"Start: Pair UI objects - ImageView.");
+        for (int i = 0 ; i < 3 ; i++)
+            for (int q = 0 ; q < 8 ; q++)
+            {
+                String ImgvID = "LetterView" + i + q;                                       //String value to re-create the name of the objects made in the XML
+                int resID = getResources().getIdentifier(ImgvID, "id", getPackageName());   //get the Resource ID using the ID created beforehand
+                ltrs[i][q] = findViewById(resID);                                           //assigns a lrts[][] variable with a item in the XML
+            }
+        Log.i(TAG,"Finished: Pair UI objects - ImageView.");
+        //---------------------------//----The-Buttons----\\
+        Log.i(TAG,"Start: Pair UI objects - Button.");
+        for(int i = 0 ; i < 26 ; i++)
+        {
+            String ButtonID = "BT_" + abcb.toCharArray()[i];                                //String value to re-create the name of the objects made in the XML
+            int resID = getResources().getIdentifier(ButtonID, "id", getPackageName());     //get the Resource ID using the ID created beforehand
+            buttons[i] = findViewById(resID);                                               //assigns a buttons[][] variable with a item in the XML
+        }
+        Log.i(TAG,"Finished: Pair UI objects - Button.");
+
+    }
+
+     */
+
     //---------------------------------------------------------------//
 
     //-----------------------Vibrator service and parameters--------------------------------------//
