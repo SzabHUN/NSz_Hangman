@@ -1083,6 +1083,19 @@ private void touchvibrator () {
         }
     }
 
+/*
+    public class ScoreChange{
+        private int score;
+
+        public void SET(int v) {score = v; scoreview.setText(Long.toString(score));}
+        public int GET(int v) {return score;}
+        public void ADD(int v) {score += v; scoreview.setText(Long.toString(score));}
+        public void SUB(int v) {score -= v; scoreview.setText(Long.toString(score));}
+
+        public void RES(int v) {score = 0; scoreview.setText(Long.toString(score));}
+    }
+
+ */
 
 }
 
