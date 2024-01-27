@@ -45,6 +45,30 @@ public class GameActivity extends AppCompatActivity {
                                                         - more dynamic - easier to use
                                                         */
 
+    public static String abcb = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"; // full ABC in caps
+    public static String abcs = "abcdefghijklmnopqrstuvwxyz"; // full ABC without caps
+
+    private static final String TAG = "loginfo";
+
+    public String guessThisWord = ""; // the word that the user needs to guess will be imported into this variable
+
+    public Byte streak = 0;
+
+    public String diff = "SzabHUN";
+    public int score = 0;
+    public String scoreTable;
+
+    Random rnd = new Random();
+
+    /*
+    GlobalVariables globalvariables=(GlobalVariables)getApplication();
+    String language = globalvariables.getLanguagecode();
+
+    public long getScore() {
+        return score;
+    }
+    */
+                                                    
 
 
     @Override
