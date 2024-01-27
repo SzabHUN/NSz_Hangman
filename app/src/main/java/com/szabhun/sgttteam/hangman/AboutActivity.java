@@ -19,9 +19,13 @@ public class AboutActivity extends AppCompatActivity {
         sztiltle = findViewById(R.id.TV_Sz_Tiltle);
         sptiltle = findViewById(R.id.TV_Sp_Tiltle);
         ltiltle = findViewById(R.id.TV_L_Tiltle);
+
+
         GlobalVariables globalvariables=(GlobalVariables)getApplication();
         String language = globalvariables.getLanguagecode();
+
         int languagenum = Integer.parseInt(language);
+
         if (languagenum == 1)
         {
             credits.setText(R.string.hu_Crds);
@@ -38,5 +42,6 @@ public class AboutActivity extends AppCompatActivity {
             sptiltle.setText(R.string.Sp_t);
             ltiltle.setText(R.string.L_t);
         }
+
     }
 }

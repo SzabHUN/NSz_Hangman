@@ -11,60 +11,60 @@ public class GlobalVariables extends Application {
     private String score;
     private String scoreTable; // scores are stored in a string array, each separated by ' ; '
 
-//-----------------------------------------------------//
-public void setOpt_muteunmute(String opt_muteunmute) {
-    this.opt_muteunmute = opt_muteunmute;
-}
 
-public String getOpt_muteunmute() {
-    return opt_muteunmute;
-}
 //-----------------------------------------------------//
-public void setLanguagecode(String languagecode) {
-    this.languagecode = languagecode;
-}
+    public void setOpt_muteunmute(String opt_muteunmute) {
+        this.opt_muteunmute = opt_muteunmute;
+    }
 
-public String getLanguagecode() {
-    return languagecode;
-}
+    public String getOpt_muteunmute() {
+        return opt_muteunmute;
+    }
 //-----------------------------------------------------//
-public void setDifficulty(String difficulty)
-{
-    this.difficulty = difficulty;
-}
-
-public String getDifficulty()
-{
-    return difficulty;
-}
+    public void setLanguagecode(String languagecode) {
+        this.languagecode = languagecode;
+    }
+    
+    public String getLanguagecode() {
+        return languagecode;
+    }
 //-----------------------------------------------------//
-public void setScore(String score)
-{
-    this.score = score;
-}
+    public void setDifficulty(String difficulty)
+    {
+        this.difficulty = difficulty;
+    }
 
-public String getScore()
-{
-    return score;
-}
+    public String getDifficulty()
+    {
+        return difficulty;
+    }
 //-----------------------------------------------------//
-public String getOpt_difficulty() {
-    return opt_difficulty;
-}
+    public void setScore(String score)
+    {
+        this.score = score;
+    }
 
-public void setOpt_difficulty(String opt_difficulty) {
-    this.opt_difficulty = opt_difficulty;
-}
+    public String getScore()
+    {
+        return score;
+    }
 //-----------------------------------------------------//
-public void setScoreTable(String scoreTable)
-{
-    this.scoreTable = scoreTable;
-}
+    public String getOpt_difficulty() {
+        return opt_difficulty;
+    }
 
-public String getScoreTable()
-{
-    return scoreTable;
-}
+    public void setOpt_difficulty(String opt_difficulty) {
+        this.opt_difficulty = opt_difficulty;
+    }
 //-----------------------------------------------------//
+    public void setScoreTable(String scoreTable)
+    {
+        this.scoreTable = scoreTable;
+    }
 
+    public String getScoreTable()
+    {
+        return scoreTable;
+    }
+//-----------------------------------------------------//
 }

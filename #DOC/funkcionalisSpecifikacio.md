@@ -1,0 +1,15 @@
+# funkcionális specifikáció
+- legtöbb android eszköz támogatása
+- hibamentes működés
+- több nyelv támogatása
+    - angol
+    - magyar
+- beállítási lehetőségek biztosítása
+- játék gördülékeny menete
+    - új játék gomb
+    - játék reset gomb
+    - elért pontszám követése több ablakban is
+    - többszálas program futás
+- eszköz függő a felhasználó
+    - felhasználóhoz csatolt pontszámok
+- bővíthető szótár

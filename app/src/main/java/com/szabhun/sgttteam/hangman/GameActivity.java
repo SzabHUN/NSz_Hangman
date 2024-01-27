@@ -34,7 +34,7 @@ import static android.content.ContentValues.TAG;
 public class GameActivity extends AppCompatActivity {
 
 
-     //there are 26 letters in the english alphabet
+    //there are 26 letters in the english alphabet
     //there will be 7 parts to the Hanged Man
 
     //Button la,lb,lc,ld,le,lf,lg,lh,li,lj,lk,ll,lm,ln,lo,lp,lq,lr,ls,lt,lu,lv,lw,lx,ly,lz;
@@ -72,15 +72,13 @@ public class GameActivity extends AppCompatActivity {
         return score;
     }
     */
-                                                    
-
 
     @Override
     public Context createDisplayContext(Display display) {
         return super.createDisplayContext(display);
     }
 
-/*
+    /*
      * cheat sheet
      * new ResetAll().run(); → same thread
      * new Thread(ResetRun).start(); → new
@@ -104,7 +102,6 @@ public class GameActivity extends AppCompatActivity {
 
 
     public int points = 0;
-    
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -153,30 +150,7 @@ public class GameActivity extends AppCompatActivity {
 
 
     }
-
-
-    
-
-    //-----------------------Fullscreen------------------------------//
-
-    @Override
-    public void onWindowFocusChanged(boolean focuschange) {
-        Log.i(TAG,"Start: Fullscreen.");
-        super.onWindowFocusChanged(focuschange);
-        View objecthide = getWindow().getDecorView();
-        if (focuschange) {
-            objecthide.setSystemUiVisibility(
-                    View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                            | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                            | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                            | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                            | View.SYSTEM_UI_FLAG_FULLSCREEN
-                            | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
-
-        }
-        Log.i(TAG,"Loaded: Fullscreen.");
-    }
-    //public GlobalVariables globalvariables=(GlobalVariables)getApplication();
+ //public GlobalVariables globalvariables=(GlobalVariables)getApplication();
     /*
     public void getGlobalz() {
         GlobalVariables globalvariables=(GlobalVariables)getApplication();
@@ -249,7 +223,8 @@ public class GameActivity extends AppCompatActivity {
 
      */
 
-     public void NewWord (View view)
+
+    public void NewWord (View view)
     {
 
         //---------------------------//
@@ -280,54 +255,41 @@ public class GameActivity extends AppCompatActivity {
         //new Thread(ClearRun).start();
     }
 
-    
 
-    //----------------------------------------//
-    
+    //-----------------------Fullscreen------------------------------//
 
+    @Override
+    public void onWindowFocusChanged(boolean focuschange) {
+        Log.i(TAG,"Start: Fullscreen.");
+        super.onWindowFocusChanged(focuschange);
+        View objecthide = getWindow().getDecorView();
+        if (focuschange) {
+            objecthide.setSystemUiVisibility(
+                    View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                            | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                            | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                            | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                            | View.SYSTEM_UI_FLAG_FULLSCREEN
+                            | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
 
-    
-
-    //----------------------------------------//
-    
-    //----------------------------------------//
-
-    public int lives = 7;
-
-//-----------------------Fullscreen------------------------------//
-
-@Override
-public void onWindowFocusChanged(boolean focuschange) {
-    Log.i(TAG,"Start: Fullscreen.");
-    super.onWindowFocusChanged(focuschange);
-    View objecthide = getWindow().getDecorView();
-    if (focuschange) {
-        objecthide.setSystemUiVisibility(
-                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                        | View.SYSTEM_UI_FLAG_FULLSCREEN
-                        | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
-
+        }
+        Log.i(TAG,"Loaded: Fullscreen.");
     }
-    Log.i(TAG,"Loaded: Fullscreen.");
-}
-//---------------------------------------------------------------//
+    //---------------------------------------------------------------//
 
-//-----------------------Vibrator service and parameters--------------------------------------//
-private void touchvibrator () {
-    Log.i(TAG, "Start: Vibrator service.");
-    Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-        v.vibrate(VibrationEffect.createOneShot(100, VibrationEffect.DEFAULT_AMPLITUDE));
-    } else {
-        v.vibrate(100);
+    //-----------------------Vibrator service and parameters--------------------------------------//
+    private void touchvibrator () {
+        Log.i(TAG, "Start: Vibrator service.");
+        Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            v.vibrate(VibrationEffect.createOneShot(100, VibrationEffect.DEFAULT_AMPLITUDE));
+        } else {
+            v.vibrate(100);
+        }
+        Log.i(TAG, "Loaded: Vibrator service.");
     }
-    Log.i(TAG, "Loaded: Vibrator service.");
-}
-//--------------------------------------------------------------------------------------------//
-//----------------------------------------//
+    //--------------------------------------------------------------------------------------------//
+    //----------------------------------------//
     private void Reset ()
     {
         Log.i(TAG,"Start: Reset buttons pair images.");
@@ -418,6 +380,9 @@ private void touchvibrator () {
 
     }
     //----------------------------------------//
+
+
+
     public Boolean letMeGo = false;
 
     //----------------------------------------//
@@ -529,6 +494,14 @@ private void touchvibrator () {
     }
     //----------------------------------------//
 
+    public int lives = 7;
+
+    //----------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
+
+
     private void checkpreferencesbackgroundsound()
     {
         final MediaPlayer mpbackground = MediaPlayer.create(this, R.raw.gamebackgroundmusic);
@@ -563,8 +536,8 @@ private void touchvibrator () {
         }
 
     }
-    //----//
-    
+
+
     public void AnyButtonIsPressed (View view)
     {
 
@@ -701,8 +674,10 @@ private void touchvibrator () {
         Log.i(TAG, "Finish: ButtonOnclick");
 
     }
-    //----//
-    
+
+
+    //----------------------------------------------------------------------------------------------
+
     public void CheckTheUserInput (String userInput)
     {
 
@@ -798,7 +773,6 @@ private void touchvibrator () {
         Log.i(TAG, "Finished: checking the button press");
 
     }
-    //----//
     public void VictoryTxt ()
     {
 
@@ -923,7 +897,18 @@ private void touchvibrator () {
 
         Toast.makeText(this, "You were suppose to guess this word : " + guessThisWord, Toast.LENGTH_LONG).show();
     }
-    //----//
+    //----------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
+
+    public void SaveScore ()
+    {
+
+    }
+
+    //----------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
+
+
     public class ResetAll implements Runnable
     {
         @Override
@@ -971,11 +956,6 @@ private void touchvibrator () {
             Log.i(TAG,"Finished: Full reset.");
         }
     }
-    //----//
-    //----//
-
-
-
 
     public class GetGlobal implements Runnable {
 
@@ -1082,7 +1062,6 @@ private void touchvibrator () {
             lives = 7;
         }
     }
-
 /*
     public class ScoreChange{
         private int score;
