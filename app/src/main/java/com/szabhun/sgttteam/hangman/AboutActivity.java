@@ -22,5 +22,21 @@ public class AboutActivity extends AppCompatActivity {
         GlobalVariables globalvariables=(GlobalVariables)getApplication();
         String language = globalvariables.getLanguagecode();
         int languagenum = Integer.parseInt(language);
+        if (languagenum == 1)
+        {
+            credits.setText(R.string.hu_Crds);
+            description.setText(R.string.hu_AB_Desc);
+            sztiltle.setText(R.string.hu_Sz_t);
+            sptiltle.setText(R.string.hu_Sp_t);
+            ltiltle.setText(R.string.hu_L_t);
+        }
+        else if (languagenum == 0)
+        {
+            credits.setText(R.string.Crds);
+            description.setText(R.string.AB_Desc);
+            sztiltle.setText(R.string.Sz_t);
+            sptiltle.setText(R.string.Sp_t);
+            ltiltle.setText(R.string.L_t);
+        }
     }
 }
