@@ -702,6 +702,103 @@ private void touchvibrator () {
 
     }
     //----//
+    
+    public void CheckTheUserInput (String userInput)
+    {
+
+
+        Log.i(TAG, "Starting: checking the button press");
+        if (lives != 0 && points != guessThisWord.length())
+        {
+            if (guessThisWord.contains(userInput))
+            {
+                for (int i = 0; i < guessThisWord.length(); i++)
+                {
+                    if (guessThisWord.toCharArray()[i] == userInput.toCharArray()[0]) // "userinput.toCharArray" needed a Char variable, this was the easiest
+                    {
+                        points++;
+                        int resID = getResources().getIdentifier(userInput.toLowerCase(), "drawable",getPackageName()); //get resources and set output letter resource
+                        ltrs[0][i].setImageResource(resID);
+                        switch (diff)
+                        {
+                            case"easy":
+                                Log.i(TAG, "Res:easy");
+                                score = score + 15;
+                                break;
+                            case"normal":
+                                Log.i(TAG, "Res:normal");
+                                score = score + 25;
+                                break;
+                            case"hard":
+                                Log.i(TAG, "Res:hard");
+                                score = score + 40;
+                                break;
+                            default:
+                                Log.i(TAG, "Res:wtf-part-win-----------------------WTF_HELP---");
+                                //Toast.makeText(this, "WTF - win", Toast.LENGTH_LONG).show();
+                                break;
+                        }
+                    }
+                }
+
+                //score += 15;
+                /* moved it into the for loop just above
+                switch (diff)
+                {
+                    case"easy":
+                        Log.i(TAG, "Res:easy");
+                        score = score + 15;
+                        break;
+                    case"normal":
+                        Log.i(TAG, "Res:normal");
+                        score = score + 25;
+                        break;
+                    case"hard":
+                        Log.i(TAG, "Res:hard");
+                        score = score + 40;
+                        break;
+                    default:
+                        Log.i(TAG, "Res:wtf-part-win-----------------------WTF_HELP---");
+                        //Toast.makeText(this, "WTF - win", Toast.LENGTH_LONG).show();
+                        break;
+                }
+                */
+                GlobalVariables globalvariables=(GlobalVariables)getApplication();
+
+                globalvariables.setScore(Long.toString(score));
+
+                scoreview.setText(Long.toString(score));
+
+                if (points == guessThisWord.length()) // VICTORY \\---------------------------------
+                {
+                    VictoryTxt();
+
+                } // VICTORY \\---------------------------------------------------------------------
+                Log.i(TAG, "Finished: right userInput reaction");
+            }
+            else
+            {
+                Log.i(TAG, "Starting: wrong userInput reaction");
+                int tmp = 8 - lives;
+                String temp = "hangman" + tmp;
+                int resID = getResources().getIdentifier(temp, "drawable",getPackageName());
+                lives--;
+                hangman.setImageResource(resID);
+
+                if (lives == 0) // DEFEAT \\--------------------------------------------------------
+                {
+
+                    DefeatTxt();
+
+                }  // DEFEAT \\---------------------------------------------------------------------
+
+                Log.i(TAG, "Finished: wrong userInput reaction");
+            }
+        }
+        Log.i(TAG, "Finished: checking the button press");
+
+    }
+    //----//
 
     public class GetGlobal implements Runnable {
 
